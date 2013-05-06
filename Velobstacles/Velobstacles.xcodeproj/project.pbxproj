@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62325B1B17383A43009135BF /* VOReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 62325B1A17383A43009135BF /* VOReport.m */; };
+		62325B1C17383A43009135BF /* VOReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 62325B1A17383A43009135BF /* VOReport.m */; };
 		625928A31737154E00866F54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A21737154E00866F54 /* UIKit.framework */; };
 		625928A51737154E00866F54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A41737154E00866F54 /* Foundation.framework */; };
 		625928A71737154E00866F54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A61737154E00866F54 /* CoreGraphics.framework */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62325B1917383A43009135BF /* VOReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOReport.h; sourceTree = "<group>"; };
+		62325B1A17383A43009135BF /* VOReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOReport.m; sourceTree = "<group>"; };
 		6259289F1737154E00866F54 /* Velobstacles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Velobstacles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		625928A21737154E00866F54 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		625928A41737154E00866F54 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,6 +131,8 @@
 				62797BE81737FB200061FECA /* VOServerHandler.h */,
 				62797BE91737FB200061FECA /* VOServerHandler.m */,
 				625928BD1737154E00866F54 /* VOViewController.h */,
+				62325B1917383A43009135BF /* VOReport.h */,
+				62325B1A17383A43009135BF /* VOReport.m */,
 				625928BE1737154E00866F54 /* VOViewController.m */,
 				625928A91737154E00866F54 /* Supporting Files */,
 			);
@@ -281,6 +287,7 @@
 				625928B31737154E00866F54 /* VOAppDelegate.m in Sources */,
 				625928BF1737154E00866F54 /* VOViewController.m in Sources */,
 				62797BEA1737FB200061FECA /* VOServerHandler.m in Sources */,
+				62325B1B17383A43009135BF /* VOReport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +297,7 @@
 			files = (
 				625928D41737154E00866F54 /* VelobstaclesTests.m in Sources */,
 				62797BEB1737FB200061FECA /* VOServerHandler.m in Sources */,
+				62325B1C17383A43009135BF /* VOReport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
