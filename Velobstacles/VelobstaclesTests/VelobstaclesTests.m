@@ -7,7 +7,8 @@
 //
 
 #import "VelobstaclesTests.h"
-
+#import "VOServerHandler.h"
+#import <CoreLocation/CoreLocation.h>
 @implementation VelobstaclesTests
 
 - (void)setUp
@@ -26,7 +27,23 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in VelobstaclesTests");
+//    STFail(@"Unit tests are not implemented yet in VelobstaclesTests");
 }
 
+//-(void)testStringFormater
+//{
+//    CLLocationCoordinate2D coord;
+//    coord.longitude = -73.5;
+//    coord.latitude = 45.5;
+//    
+//    CLLocationDistance dist = 500;
+//    
+//    NSString* target = [NSString stringWithFormat:@"http://api.velobstacles.com/media/lat=45.5&long=-73.5&rad=500"];
+//    NSString* result = [VOServerHandler reportsForLocation:coord radius:dist];
+//    NSLog(@"%@,%@",target,result);
+//    STAssertTrue([target isEqualToString:result], @"string testing");
+//
+//    
+//    
+//}
 @end
