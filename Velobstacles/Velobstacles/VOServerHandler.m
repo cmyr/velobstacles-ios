@@ -13,7 +13,7 @@
 
 @end
 
-#define BASE_URL @"http://api.velobstacles.com"
+#define BASE_URL @"http://api.velobstacles.com/media"
 
 @implementation VOServerHandler
 
@@ -21,12 +21,17 @@
 //returns reports as an NSArray
 +(NSArray*)reportsForLocation:(CLLocationCoordinate2D)location radius:(CLLocationDistance)radius
 {
-    NSString* queryString = [NSString stringWithFormat:@"/media/lat=%g&long=%g&rad=%g",
-                   location.latitude,
-                   location.longitude,
-                   radius];
+    NSMutableDictionary* args = [NSMutableDictionary dictionary];
+    args[VO_LATITUDE] = [NSString stringWithFormat:@"%g", location.latitude];
+    args[VO_LONGITUDE] = [NSString stringWithFormat:@"%g", location.longitude];
+    args[VO_RADIUS] = [NSString stringWithFormat:@"%g", radius];
+    
+//    NSString* queryString = [NSString stringWithFormat:@"/media/lat=%g&long=%g&rad=%g",
+//                   location.latitude,
+//                   location.longitude,
+//                   radius];
 
-    NSDictionary* queryResult = [self fetchQuery:queryString];
+    NSDictionary* queryResult = [self fetchQueryWithArgs:args];
     return queryResult[@"data"];
 }
 
@@ -41,14 +46,28 @@
 {
     
 }
+#pragma mark tests
+
++ (NSDictionary*)getTest{
+    return [self fetchQueryWithArgs:nil];
+}
 
 #pragma mark helper methods
 
-+ (NSDictionary*)fetchQuery:(NSString*)query
+// takes a dictionary of API arguments, returns an NSDictionary with results
++ (NSDictionary*)fetchQueryWithArgs:(NSDictionary*)args
 {
-    query = [NSString stringWithFormat:@"%@%@", BASE_URL, query];
+    NSMutableString* queryArgs = [[NSMutableString alloc]init];
+    NSArray* keys = [args allKeys];
+    for (NSString* key in keys){
+        [queryArgs appendFormat:@"%@=%@&", key, args[key]];
+    }
+   NSString* query = [NSString stringWithFormat:@"%@%@", BASE_URL, queryArgs];
     query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSData* jsonData = [NSString stringWithContentsOfURL:[NSURL URLWithString:query] encoding:NSUTF8StringEncoding error:nil];
+    NSData* jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:query]
+                                                 encoding: NSUTF8StringEncoding
+                                                    error:nil]
+                        dataUsingEncoding:NSUTF8StringEncoding];
     NSError* error = nil;
     NSDictionary* results = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
     if (error){

@@ -11,6 +11,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+#define VO_LATITUDE @"lat"
+#define VO_LONGITUDE @"long"
+#define VO_RADIUS @"rad"
+
+
 typedef enum VOImageFormat : NSUInteger{
     VOImageFormatThumb,
     VOImageFormatNormal
@@ -22,5 +27,6 @@ typedef enum VOImageFormat : NSUInteger{
 +(UIImage*)imageForReport:(NSNumber*)reportID format:(VOImageFormat)format;
 +(void)postReport:(id)report;
 
-
+//tests
++(NSDictionary*)getTest;
 @end

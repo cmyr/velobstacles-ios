@@ -30,6 +30,12 @@
 //    STFail(@"Unit tests are not implemented yet in VelobstaclesTests");
 }
 
+-(void)testFetch
+{
+    NSDictionary* dict = [VOServerHandler getTest];
+    STAssertNotNil(dict, @"fetching dictionary from server");
+}
+
 //-(void)testStringFormater
 //{
 //    CLLocationCoordinate2D coord;
