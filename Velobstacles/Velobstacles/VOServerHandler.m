@@ -47,25 +47,50 @@
 }
 
 // posts a new report
-+(void)postReport:(id)report
++(void)postReport:(NSDictionary*)report
 {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+    [request setURL:[NSURL URLWithString:BASE_URL]];
+    [request setHTTPMethod:@"POST"];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
     
 }
+
 #pragma mark tests
 
 + (NSDictionary*)getTest{
     return [self fetchQueryWithArgs:nil];
 }
 
++(UIImage*)getImageTest{
+    NSDictionary* args = [NSDictionary dictionaryWithObject:@"/5118fe5ab821d90005c1a24d/content" forKey:@"string"];
+    
+    NSDictionary* results = [self fetchQueryWithArgs:args];
+    NSLog(@"%@", results);
+    //    return [UIImage imageWithData:results[@"photo"]];
+//    return nil;
+//    return [UIImage imageWithData:imgData];
+    return nil;
+}
+
 #pragma mark helper methods
 
 // takes a dictionary of API arguments, returns an NSDictionary with results
-+ (NSDictionary*)fetchQueryWithArgs:(NSDictionary*)args
++ (NSDictionary*)fetchQueryWithArgs:(NSDictionary*)args 
 {
+    // if we only have one argument treat it as a string
+    // else treat key/obj pairs as "k=o" arguments
     NSMutableString* queryArgs = [[NSMutableString alloc]init];
-    NSArray* keys = [args allKeys];
-    for (NSString* key in keys){
-        [queryArgs appendFormat:@"%@=%@&", key, args[key]];
+    if (args.count == 1){
+        queryArgs = [args allValues][0];
+    }else{
+        NSArray* keys = [args allKeys];
+        for (NSString* key in keys){
+            [queryArgs appendFormat:@"%@=%@&", key, args[key]];
+        }
     }
    NSString* query = [NSString stringWithFormat:@"%@%@", BASE_URL, queryArgs];
     query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -79,7 +104,7 @@
         NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
         return nil;
     }
-    return results;
+    return (NSDictionary*)results;
 }
 
 @end

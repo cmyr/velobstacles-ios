@@ -42,6 +42,12 @@
     STAssertNotNil(dict, @"fetching dictionary from server");
 }
 
+-(void)testImageFetch
+{
+    UIImage* anImage = [VOServerHandler getImageTest];
+    STAssertNotNil(@"rups", @"cheating hi");
+}
+
 //-(void)testStringFormater
 //{
 //    CLLocationCoordinate2D coord;

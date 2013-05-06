@@ -32,4 +32,6 @@ typedef enum VOImageFormat : NSUInteger{
 
 //tests
 +(NSDictionary*)getTest;
++(NSDictionary*)getImageTest;
+
 @end
