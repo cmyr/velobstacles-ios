@@ -23,6 +23,8 @@
 		625928C91737154E00866F54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A41737154E00866F54 /* Foundation.framework */; };
 		625928D11737154E00866F54 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 625928CF1737154E00866F54 /* InfoPlist.strings */; };
 		625928D41737154E00866F54 /* VelobstaclesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 625928D31737154E00866F54 /* VelobstaclesTests.m */; };
+		62797BEA1737FB200061FECA /* VOServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 62797BE91737FB200061FECA /* VOServerHandler.m */; };
+		62797BEB1737FB200061FECA /* VOServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 62797BE91737FB200061FECA /* VOServerHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		625928D01737154E00866F54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		625928D21737154E00866F54 /* VelobstaclesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VelobstaclesTests.h; sourceTree = "<group>"; };
 		625928D31737154E00866F54 /* VelobstaclesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VelobstaclesTests.m; sourceTree = "<group>"; };
+		62797BE81737FB200061FECA /* VOServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOServerHandler.h; sourceTree = "<group>"; };
+		62797BE91737FB200061FECA /* VOServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOServerHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,8 @@
 				625928B11737154E00866F54 /* VOAppDelegate.h */,
 				625928B21737154E00866F54 /* VOAppDelegate.m */,
 				625928BA1737154E00866F54 /* MainStoryboard.storyboard */,
+				62797BE81737FB200061FECA /* VOServerHandler.h */,
+				62797BE91737FB200061FECA /* VOServerHandler.m */,
 				625928BD1737154E00866F54 /* VOViewController.h */,
 				625928BE1737154E00866F54 /* VOViewController.m */,
 				625928A91737154E00866F54 /* Supporting Files */,
@@ -274,6 +280,7 @@
 				625928AF1737154E00866F54 /* main.m in Sources */,
 				625928B31737154E00866F54 /* VOAppDelegate.m in Sources */,
 				625928BF1737154E00866F54 /* VOViewController.m in Sources */,
+				62797BEA1737FB200061FECA /* VOServerHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				625928D41737154E00866F54 /* VelobstaclesTests.m in Sources */,
+				62797BEB1737FB200061FECA /* VOServerHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +393,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Velobstacles/Velobstacles-Prefix.pch";
 				INFOPLIST_FILE = "Velobstacles/Velobstacles-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -396,6 +405,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Velobstacles/Velobstacles-Prefix.pch";
 				INFOPLIST_FILE = "Velobstacles/Velobstacles-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -454,6 +464,7 @@
 				625928D91737154E00866F54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		625928DA1737154E00866F54 /* Build configuration list for PBXNativeTarget "VelobstaclesTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +473,7 @@
 				625928DC1737154E00866F54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
