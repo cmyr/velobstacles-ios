@@ -11,6 +11,8 @@
 		62325B1C17383A43009135BF /* VOReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 62325B1A17383A43009135BF /* VOReport.m */; };
 		62325B1F17385069009135BF /* SimpleHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 62325B1E17385069009135BF /* SimpleHTTPRequest.m */; };
 		62325B2017385069009135BF /* SimpleHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 62325B1E17385069009135BF /* SimpleHTTPRequest.m */; };
+		62325B22173850E4009135BF /* pothole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62325B21173850E4009135BF /* pothole.jpg */; };
+		62325B23173850E4009135BF /* pothole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62325B21173850E4009135BF /* pothole.jpg */; };
 		625928A31737154E00866F54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A21737154E00866F54 /* UIKit.framework */; };
 		625928A51737154E00866F54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A41737154E00866F54 /* Foundation.framework */; };
 		625928A71737154E00866F54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A61737154E00866F54 /* CoreGraphics.framework */; };
@@ -46,6 +48,7 @@
 		62325B1A17383A43009135BF /* VOReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOReport.m; sourceTree = "<group>"; };
 		62325B1D17385069009135BF /* SimpleHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleHTTPRequest.h; path = ../../../lib/SimpleHttpRequest/SimpleHTTPRequest.h; sourceTree = "<group>"; };
 		62325B1E17385069009135BF /* SimpleHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleHTTPRequest.m; path = ../../../lib/SimpleHttpRequest/SimpleHTTPRequest.m; sourceTree = "<group>"; };
+		62325B21173850E4009135BF /* pothole.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pothole.jpg; sourceTree = "<group>"; };
 		6259289F1737154E00866F54 /* Velobstacles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Velobstacles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		625928A21737154E00866F54 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		625928A41737154E00866F54 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,6 +143,7 @@
 				62325B1917383A43009135BF /* VOReport.h */,
 				62325B1A17383A43009135BF /* VOReport.m */,
 				625928BE1737154E00866F54 /* VOViewController.m */,
+				62325B21173850E4009135BF /* pothole.jpg */,
 				625928A91737154E00866F54 /* Supporting Files */,
 			);
 			path = Velobstacles;
@@ -255,6 +259,7 @@
 				625928B71737154E00866F54 /* Default@2x.png in Resources */,
 				625928B91737154E00866F54 /* Default-568h@2x.png in Resources */,
 				625928BC1737154E00866F54 /* MainStoryboard.storyboard in Resources */,
+				62325B22173850E4009135BF /* pothole.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				625928D11737154E00866F54 /* InfoPlist.strings in Resources */,
+				62325B23173850E4009135BF /* pothole.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

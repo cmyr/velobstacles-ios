@@ -19,4 +19,6 @@
 @property (nonatomic) BOOL hasPhoto;
 
 +(VOReport*)reportWithDict:(NSDictionary*)dict;
++(VOReport*)testReport;
+
 @end

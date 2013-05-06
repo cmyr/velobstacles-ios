@@ -7,6 +7,8 @@
 //
 
 #import "VOServerHandler.h"
+#import "SimpleHTTPRequest.h"
+#import "VOReport.h"
 
 @interface VOServerHandler ()
 
@@ -49,13 +51,8 @@
 // posts a new report
 +(void)postReport:(NSDictionary*)report
 {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-    [request setURL:[NSURL URLWithString:BASE_URL]];
-    [request setHTTPMethod:@"POST"];
-    NSString *boundary = @"---------------------------14737809831466499882746641449";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
+
     
 }
 
@@ -64,10 +61,30 @@
 + (NSDictionary*)getTest{
     return [self fetchQueryWithArgs:nil];
 }
-
-+(UIImage*)getImageTest{
-    NSDictionary* args = [NSDictionary dictionaryWithObject:@"/5118fe5ab821d90005c1a24d/content" forKey:@"string"];
++ (void)postTest{
+    VOReport* report = [VOReport testReport];
+    UIImage* anImage = [UIImage imageNamed:@"pothole.jpg"];
+    NSDictionary* submission = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSString stringWithFormat:@"%g",report.location.latitude],
+                                @"latitude",
+                                [NSString stringWithFormat:@"%g", report.location.longitude],
+                                @"longitude",
+                                UIImageJPEGRepresentation(anImage, 1.0),
+                                @"content",
+                                nil];
+    NSURLRequest* request = [SimpleHTTPRequest multipartRequestWithURL:[NSURL URLWithString:BASE_URL]
+                                     andMethod:@"POST"
+                             andDataDictionary:submission];
     
+    NSURLResponse* response = nil;
+    NSError* error = nil;
+    [NSURLConnection sendSynchronousRequest:request
+                          returningResponse:&response
+                                      error:&error];
+}
+
++ (UIImage*)getImageTest{
+    NSDictionary* args = [NSDictionary dictionaryWithObject:@"/5118fe5ab821d90005c1a24d/content" forKey:@"string"];
     NSDictionary* results = [self fetchQueryWithArgs:args];
     NSLog(@"%@", results);
     //    return [UIImage imageWithData:results[@"photo"]];

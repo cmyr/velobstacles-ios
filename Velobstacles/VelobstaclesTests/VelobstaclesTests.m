@@ -48,6 +48,11 @@
     STAssertNotNil(@"rups", @"cheating hi");
 }
 
+//-(void)testPost
+//{
+//    [VOServerHandler postTest];
+//}
+
 //-(void)testStringFormater
 //{
 //    CLLocationCoordinate2D coord;

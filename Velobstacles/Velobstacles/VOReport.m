@@ -15,4 +15,20 @@
 {
     return nil;
 }
+
++(VOReport*)testReport
+{
+   
+    VOReport* report = [[VOReport alloc]init];
+    //generate a random coordinate:
+    float randLat, randLong;
+    randLat = (arc4random() % 400)*0.0001f;
+    randLat += 45.49;
+    randLong = (arc4random() % 500)*0.0001f;
+    randLong += -73.6;
+    CLLocationCoordinate2D coord; coord.longitude = randLong; coord.latitude = randLat;
+    report.location = coord;
+    
+    return report;
+}
 @end
