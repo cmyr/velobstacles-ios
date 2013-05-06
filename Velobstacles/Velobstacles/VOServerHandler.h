@@ -14,6 +14,9 @@
 #define VO_LATITUDE @"lat"
 #define VO_LONGITUDE @"long"
 #define VO_RADIUS @"rad"
+#define VO_DATA @"data"
+#define VO_ID @"id"
+#define VO_FORMAT @"format"
 
 
 typedef enum VOImageFormat : NSUInteger{

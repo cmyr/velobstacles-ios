@@ -25,20 +25,25 @@
     args[VO_LATITUDE] = [NSString stringWithFormat:@"%g", location.latitude];
     args[VO_LONGITUDE] = [NSString stringWithFormat:@"%g", location.longitude];
     args[VO_RADIUS] = [NSString stringWithFormat:@"%g", radius];
-    
-//    NSString* queryString = [NSString stringWithFormat:@"/media/lat=%g&long=%g&rad=%g",
-//                   location.latitude,
-//                   location.longitude,
-//                   radius];
-
-    NSDictionary* queryResult = [self fetchQueryWithArgs:args];
-    return queryResult[@"data"];
+    return [self fetchQueryWithArgs:args][@"data"];
+//    return queryResult[@"data"];
 }
 
 // fetches an image for a given report
 +(UIImage*)imageForReport:(NSNumber *)reportID format:(VOImageFormat)format
 {
-    return nil;
+    NSString* formatString = @"r";
+    switch (format) {
+        case VOImageFormatThumb:    formatString = @"t"; break;
+        case VOImageFormatNormal:   formatString = @"r"; break;
+    }
+    NSMutableDictionary* args = [NSMutableDictionary dictionary];
+    args[VO_ID] = [reportID stringValue];
+    args[VO_FORMAT] = formatString;
+    
+    //    get NSData representation of image
+    NSData* imgData = [self fetchQueryWithArgs:args][@"photo"];
+    return [UIImage imageWithData:imgData];
 }
 
 // posts a new report

@@ -33,6 +33,12 @@
 -(void)testFetch
 {
     NSDictionary* dict = [VOServerHandler getTest];
+    NSArray* data = dict[@"data"];
+    
+    for (id obj in data){
+        NSLog(@"%@", obj);
+    }
+    
     STAssertNotNil(dict, @"fetching dictionary from server");
 }
 
