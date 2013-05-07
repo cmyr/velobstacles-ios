@@ -61,6 +61,7 @@
 + (NSDictionary*)getTest{
     return [self fetchQueryWithArgs:nil];
 }
+
 + (void)postTest{
     VOReport* report = [VOReport testReport];
     UIImage* anImage = [UIImage imageNamed:@"pothole.jpg"];

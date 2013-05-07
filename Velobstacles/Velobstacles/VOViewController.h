@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class MKMapView;
 @interface VOViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+- (IBAction)reportAction:(UIBarButtonItem *)sender;
 @end

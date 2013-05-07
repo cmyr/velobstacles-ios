@@ -7,6 +7,8 @@
 //
 
 #import "VOViewController.h"
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface VOViewController ()
 
@@ -26,4 +28,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload {
+    [self setMapView:nil];
+    [super viewDidUnload];
+}
+- (IBAction)reportAction:(UIBarButtonItem *)sender {
+}
 @end
