@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString* description;
 @property (nonatomic) BOOL debug;
 @property (nonatomic) BOOL hasPhoto;
+@property (nonatomic, strong) UIImage* image;
 
 +(VOReport*)reportWithDict:(NSDictionary*)dict;
 +(VOReport*)testReport;
