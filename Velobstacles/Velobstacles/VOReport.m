@@ -29,6 +29,9 @@
     CLLocationCoordinate2D coord; coord.longitude = randLong; coord.latitude = randLat;
     report.location = coord;
     
+    report.timestamp = [NSDate date];
+    
+    
     return report;
 }
 @end

@@ -15,8 +15,6 @@
 		62325B23173850E4009135BF /* pothole.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62325B21173850E4009135BF /* pothole.jpg */; };
 		623D6227173948ED00615032 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623D6226173948ED00615032 /* CoreLocation.framework */; };
 		623D6229173948F300615032 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623D6228173948F300615032 /* MapKit.framework */; };
-		623D622C173949AF00615032 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623D622B173949AF00615032 /* VOReportViewController.m */; };
-		623D622D173949AF00615032 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623D622B173949AF00615032 /* VOReportViewController.m */; };
 		625928A31737154E00866F54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A21737154E00866F54 /* UIKit.framework */; };
 		625928A51737154E00866F54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A41737154E00866F54 /* Foundation.framework */; };
 		625928A71737154E00866F54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A61737154E00866F54 /* CoreGraphics.framework */; };
@@ -36,6 +34,8 @@
 		62797BEA1737FB200061FECA /* VOServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 62797BE91737FB200061FECA /* VOServerHandler.m */; };
 		62797BEB1737FB200061FECA /* VOServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 62797BE91737FB200061FECA /* VOServerHandler.m */; };
 		62B4EEF81739623D0096C9F8 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B4EEF71739623D0096C9F8 /* pin2.png */; };
+		62B4EEFB17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
+		62B4EEFC17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +56,6 @@
 		62325B21173850E4009135BF /* pothole.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pothole.jpg; sourceTree = "<group>"; };
 		623D6226173948ED00615032 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		623D6228173948F300615032 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		623D622A173949AF00615032 /* VOReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOReportViewController.h; sourceTree = "<group>"; };
-		623D622B173949AF00615032 /* VOReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOReportViewController.m; sourceTree = "<group>"; };
 		6259289F1737154E00866F54 /* Velobstacles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Velobstacles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		625928A21737154E00866F54 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		625928A41737154E00866F54 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -83,6 +81,8 @@
 		62797BE81737FB200061FECA /* VOServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOServerHandler.h; sourceTree = "<group>"; };
 		62797BE91737FB200061FECA /* VOServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOServerHandler.m; sourceTree = "<group>"; };
 		62B4EEF71739623D0096C9F8 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
+		62B4EEF917396CC70096C9F8 /* VOReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VOReportViewController.h; path = ../VOReportViewController.h; sourceTree = "<group>"; };
+		62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VOReportViewController.m; path = ../VOReportViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,11 +146,11 @@
 		625928A81737154E00866F54 /* Velobstacles */ = {
 			isa = PBXGroup;
 			children = (
+				62B4EEF917396CC70096C9F8 /* VOReportViewController.h */,
+				62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */,
 				625928B11737154E00866F54 /* VOAppDelegate.h */,
 				625928B21737154E00866F54 /* VOAppDelegate.m */,
 				625928BA1737154E00866F54 /* MainStoryboard.storyboard */,
-				623D622A173949AF00615032 /* VOReportViewController.h */,
-				623D622B173949AF00615032 /* VOReportViewController.m */,
 				62797BE81737FB200061FECA /* VOServerHandler.h */,
 				62797BE91737FB200061FECA /* VOServerHandler.m */,
 				62325B1D17385069009135BF /* SimpleHTTPRequest.h */,
@@ -319,7 +319,7 @@
 				62797BEA1737FB200061FECA /* VOServerHandler.m in Sources */,
 				62325B1B17383A43009135BF /* VOReport.m in Sources */,
 				62325B1F17385069009135BF /* SimpleHTTPRequest.m in Sources */,
-				623D622C173949AF00615032 /* VOReportViewController.m in Sources */,
+				62B4EEFB17396CC70096C9F8 /* VOReportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +331,7 @@
 				62797BEB1737FB200061FECA /* VOServerHandler.m in Sources */,
 				62325B1C17383A43009135BF /* VOReport.m in Sources */,
 				62325B2017385069009135BF /* SimpleHTTPRequest.m in Sources */,
-				623D622D173949AF00615032 /* VOReportViewController.m in Sources */,
+				62B4EEFC17396CC70096C9F8 /* VOReportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

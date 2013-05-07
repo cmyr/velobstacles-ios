@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VOReportViewController : UITableViewController
-- (IBAction)cancelButton:(UIBarButtonItem *)sender;
 
 @end
