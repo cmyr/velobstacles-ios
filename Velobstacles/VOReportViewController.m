@@ -28,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.report = [VOReport testReport];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -68,39 +68,39 @@
 #define PHOTO_CELL_ID @"photo"
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    static NSString *CellIdentifier = @"Cell";
-    static NSString *infoCellID = @"Info Cell";
-//    static NSString *catCellID = @"category";
-//    static NSString *descCellID = @"description";
-//    static NSString *photoCellID = @"photo";
+    static NSString *infoCellID = @"info";
+    static NSString *catCellID = @"category";
+    static NSString *descCellID = @"description";
+    static NSString *photoCellID = @"photo";
 
     NSLog(@"%@",indexPath);
     UITableViewCell* cell;
     if (indexPath.section == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:infoCellID forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:infoCellID];
         cell.textLabel.text = [self.report.timestamp descriptionWithLocale:[NSLocale currentLocale]];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"(%g, %g)",
                                      self.report.location.latitude,
                                      self.report.location.longitude];
     }else if (indexPath.section == 1 && indexPath.row == 0){
-    
+        cell = [tableView dequeueReusableCellWithIdentifier:catCellID];
+        cell.textLabel.text = @"Category";
+        cell.detailTextLabel.text = self.report.category;
     }else if (indexPath.section == 1 && indexPath.row == 1){
-        
+        cell = [tableView dequeueReusableCellWithIdentifier:descCellID];
+        cell.textLabel.text = @"Description";
+        cell.detailTextLabel.text = self.report.description;
     }else if (indexPath.section == 1 && indexPath.row == 2){
-        
-    }
-//    switch (indexPath.row) {
-//        case 0:  break;
-//        case 1: CellIdentifier = descCellID; break;
-//        case 2: CellIdentifier = photoCellID;
-//        }
-//    }
-
-    // Configure the cell...
-    
+        cell = [tableView dequeueReusableCellWithIdentifier:photoCellID];
+        cell.textLabel.text = @"Add Photo";
+    }    
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat cellHeight = 44.0;
+    if (indexPath.section == 1 && indexPath.row == 1) cellHeight = 96.0;
+    return cellHeight;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

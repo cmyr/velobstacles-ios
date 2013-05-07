@@ -21,17 +21,16 @@
    
     VOReport* report = [[VOReport alloc]init];
     //generate a random coordinate:
-    float randLat, randLong;
-    randLat = (arc4random() % 400)*0.0001f;
-    randLat += 45.49;
-    randLong = (arc4random() % 500)*0.0001f;
-    randLong += -73.6;
-    CLLocationCoordinate2D coord; coord.longitude = randLong; coord.latitude = randLat;
+//    float randLat, randLong;
+//    randLat = ((arc4random() % 400)*0.0001f) + 45.49;
+//    randLong = ((arc4random() % 500)*0.0001f) + -73.6;
+    CLLocationCoordinate2D coord;
+    coord.longitude = ((arc4random() % 500)*0.0001f) + -73.6;
+    coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;
     report.location = coord;
-    
     report.timestamp = [NSDate date];
-    
-    
+    report.category = [NSString stringWithFormat:@"This Bike Path Sucks"];
+    report.description = @"and so after all of this time it came to pass that many strange things had happened, and we decided ultimately to let it wash away, like dust in early rains, this mess we'd made of life";
     return report;
 }
 @end

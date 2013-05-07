@@ -13,10 +13,12 @@
 @interface VOReport : NSObject <MKAnnotation>
 @property (nonatomic, strong) NSNumber* reportID;
 @property (nonatomic, strong) NSDate* timestamp;
+@property (nonatomic, strong) NSString* category;
 @property (nonatomic) CLLocationCoordinate2D location;
 @property (nonatomic, strong) NSString* description;
 @property (nonatomic) BOOL debug;
 @property (nonatomic) BOOL hasPhoto;
+
 @property (nonatomic, strong) UIImage* image;
 
 +(VOReport*)reportWithDict:(NSDictionary*)dict;
