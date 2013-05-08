@@ -23,5 +23,6 @@
 
 +(VOReport*)reportWithDict:(NSDictionary*)dict;
 +(VOReport*)testReport;
++(NSDictionary*)categories;
 
 @end
