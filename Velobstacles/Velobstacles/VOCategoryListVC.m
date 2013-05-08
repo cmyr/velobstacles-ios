@@ -71,7 +71,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate selectionDidFinishWithCategory:[self categoryForIndexPath:indexPath]];
+    [self.delegate categoryRecieved:[self categoryForIndexPath:indexPath]];
     [self.navigationController popViewControllerAnimated:YES];
 
 }

@@ -118,6 +118,10 @@
    
     if (indexPath.section == 1 && indexPath.row == 0){
         [self performSegueWithIdentifier:CATEGORY_SEGUE sender:self];
+    }else if (indexPath.section == 1 && indexPath.row == 1){
+        [self performSegueWithIdentifier:DESCRIPTION_SEGUE sender:self];
+    }else if (indexPath.section == 1 && indexPath.row == 2){
+        //handle media picking here
     }
     
     // Navigation logic may go here. Create and push another view controller.
@@ -149,7 +153,7 @@
     }
 }
 
--(void)selectionDidFinishWithCategory:(NSString *)category{
+-(void)categoryRecieved:(NSString *)category{
     self.report.category = category;
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
