@@ -18,14 +18,13 @@
 
 //returns a dictionary categories mapped to their id n°s
 +(NSDictionary*)categories{
-    NSDictionary* categories = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"Éclairage insuffisant",%'0',
-                                @"Qualité de la chaussée", %'1',
-                                @"Piste cyclable discontinue", %'2',
-                                @"Piste cyclable nonexistante", %'3',
-                                @"Chantier", %'4',
-                                @"voiture(s) stationnée(e)", %'5',
-                                nil];
+    NSDictionary* categories = @{
+                                @0: @"Éclairage insuffisant",
+                                @1: @"Qualité de la chaussée",
+                                @2: @"Piste cyclable discontinue",
+                                @3: @"Piste cyclable nonexistante",
+                                @4: @"Chantier",
+                                @5: @"voiture(s) stationnée(e)"};
     return categories;
 }
 

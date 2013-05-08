@@ -34,6 +34,7 @@
 		62B4EEF81739623D0096C9F8 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B4EEF71739623D0096C9F8 /* pin2.png */; };
 		62B4EEFB17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
 		62B4EEFC17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
+		6B2755EC173AB0EB0046B485 /* VOCategoryListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */; };
 		6BBB74CA1739BA3D00884950 /* VOInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB74C91739BA3D00884950 /* VOInfoCell.m */; };
 		6BBB74CD1739BA6800884950 /* VOCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB74CC1739BA6800884950 /* VOCategoryCell.m */; };
 		6BBB74D01739BA7900884950 /* VODescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB74CF1739BA7900884950 /* VODescriptionCell.m */; };
@@ -83,6 +84,8 @@
 		62B4EEF71739623D0096C9F8 /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
 		62B4EEF917396CC70096C9F8 /* VOReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VOReportViewController.h; path = ../VOReportViewController.h; sourceTree = "<group>"; };
 		62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VOReportViewController.m; path = ../VOReportViewController.m; sourceTree = "<group>"; };
+		6B2755EA173AB0EB0046B485 /* VOCategoryListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOCategoryListVC.h; sourceTree = "<group>"; };
+		6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOCategoryListVC.m; sourceTree = "<group>"; };
 		6BBB74C81739BA3D00884950 /* VOInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOInfoCell.h; sourceTree = "<group>"; };
 		6BBB74C91739BA3D00884950 /* VOInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOInfoCell.m; sourceTree = "<group>"; };
 		6BBB74CB1739BA6800884950 /* VOCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOCategoryCell.h; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 				62797BE91737FB200061FECA /* VOServerHandler.m */,
 				62325B1917383A43009135BF /* VOReport.h */,
 				62325B1A17383A43009135BF /* VOReport.m */,
+				6B2755EA173AB0EB0046B485 /* VOCategoryListVC.h */,
+				6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */,
 				625928BD1737154E00866F54 /* VOViewController.h */,
 				625928BE1737154E00866F54 /* VOViewController.m */,
 				62B4EEF917396CC70096C9F8 /* VOReportViewController.h */,
@@ -345,6 +350,7 @@
 				6BBB74CD1739BA6800884950 /* VOCategoryCell.m in Sources */,
 				6BBB74D01739BA7900884950 /* VODescriptionCell.m in Sources */,
 				6BBB74D31739BA8A00884950 /* VOPhotoCell.m in Sources */,
+				6B2755EC173AB0EB0046B485 /* VOCategoryListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
