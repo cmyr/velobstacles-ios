@@ -21,9 +21,6 @@
    
     VOReport* report = [[VOReport alloc]init];
     //generate a random coordinate:
-//    float randLat, randLong;
-//    randLat = ((arc4random() % 400)*0.0001f) + 45.49;
-//    randLong = ((arc4random() % 500)*0.0001f) + -73.6;
     CLLocationCoordinate2D coord;
     coord.longitude = ((arc4random() % 500)*0.0001f) + -73.6;
     coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;

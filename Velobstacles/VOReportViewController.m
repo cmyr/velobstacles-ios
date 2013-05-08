@@ -33,7 +33,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.report = [VOReport testReport];
+//    self.report = [VOReport testReport];
+    self.report = [[VOReport alloc]init];
+    self.report.timestamp = [NSDate date];
+    CLLocationCoordinate2D coord;
+    coord.longitude = ((arc4random() % 500)*0.0001f) + -73.6;
+    coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;
+    self.report.location = coord;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -85,11 +91,11 @@
         return cell;
     }else if (indexPath.section == 1 && indexPath.row == 0){
        VOCategoryCell* cell = (VOCategoryCell*)[tableView dequeueReusableCellWithIdentifier:catCellID];
-        cell.textLabel.text = self.report.category;
+        if (self.report.category) cell.textLabel.text = self.report.category;
         return cell;
     }else if (indexPath.section == 1 && indexPath.row == 1){
        VODescriptionCell* cell = (VODescriptionCell*)[tableView dequeueReusableCellWithIdentifier:descCellID];
-        cell.textLabel.text = self.report.description;
+       if (self.report.description) cell.textLabel.text = self.report.description;
         return cell;
     }else if (indexPath.section == 1 && indexPath.row == 2){
        VOPhotoCell* cell = (VOPhotoCell*)[tableView dequeueReusableCellWithIdentifier:photoCellID];
