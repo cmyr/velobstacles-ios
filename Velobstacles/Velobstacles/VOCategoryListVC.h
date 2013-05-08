@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class VOReport;
+
+@protocol VOCategoryTableViewDelegate <NSObject>
+-(void)selectionDidFinishWithCategory:(NSString*)category;
+-(VOReport*)report;
+//@property (strong, nonatomic) VOReport *report;
+@end
 
 @interface VOCategoryListVC : UITableViewController
-
+@property (weak, nonatomic) id<VOCategoryTableViewDelegate> delegate;
 @end

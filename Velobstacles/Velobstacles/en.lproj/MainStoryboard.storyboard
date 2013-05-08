@@ -56,7 +56,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="info" id="mX7-DF-tTi" customClass="VOInfoCell">
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="info" id="mX7-DF-tTi" customClass="VOInfoCell">
                                 <rect key="frame" x="0.0" y="46" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -81,7 +81,7 @@
                                     <outlet property="dateLabel" destination="wuq-Dh-kRJ" id="LNb-0V-zAV"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="category" id="uwI-2g-vBb" customClass="VOCategoryCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="category" id="uwI-2g-vBb" customClass="VOCategoryCell">
                                 <rect key="frame" x="0.0" y="91" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -100,10 +100,9 @@
                                 </view>
                                 <connections>
                                     <outlet property="textLabel" destination="c4h-KE-xge" id="ki8-YZ-d8N"/>
-                                    <segue destination="jm7-66-xCh" kind="push" id="I5V-OD-oEi"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="description" rowHeight="92" id="hoa-VC-ABf" customClass="VODescriptionCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="description" rowHeight="92" id="hoa-VC-ABf" customClass="VODescriptionCell">
                                 <rect key="frame" x="0.0" y="135" width="320" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -122,7 +121,6 @@
                                 </view>
                                 <connections>
                                     <outlet property="textLabel" destination="PcS-Ov-1o8" id="BUK-E1-QmU"/>
-                                    <segue destination="6XC-NJ-Ew8" kind="push" id="TOL-iQ-fwk"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photo" rowHeight="128" id="azM-1W-7cp" customClass="VOPhotoCell">
@@ -177,6 +175,8 @@ Photo</string>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="submitButton" destination="cx5-bk-7S5" id="kzy-dl-bAn"/>
+                        <segue destination="jm7-66-xCh" kind="push" identifier="categorySegue" id="JnB-bU-TP3"/>
+                        <segue destination="6XC-NJ-Ew8" kind="push" identifier="descriptionSegue" id="tvl-5z-gOX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xE-wH-yLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -192,7 +192,7 @@ Photo</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryListCell" textLabel="WSE-z8-RUL" style="IBUITableViewCellStyleDefault" id="tsU-Jj-asB">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryListCell" textLabel="WSE-z8-RUL" style="IBUITableViewCellStyleDefault" id="tsU-Jj-asB">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

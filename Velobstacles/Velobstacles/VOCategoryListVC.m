@@ -60,6 +60,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     cell.textLabel.text = [self.categories objectForKey:[NSNumber numberWithUnsignedInteger:indexPath.row]];
+    if ([cell.textLabel.text isEqualToString:[[self.delegate report]category]]) cell.accessoryType = UITableViewCellAccessoryCheckmark;
     // Configure the cell...
     
     return cell;
@@ -70,13 +71,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     ; *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self.delegate selectionDidFinishWithCategory:[self categoryForIndexPath:indexPath]];
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+-(NSString*)categoryForIndexPath:(NSIndexPath *)indexPath{
+    NSNumber *key = [NSNumber numberWithUnsignedInteger:indexPath.row];
+    return self.categories[key];
 }
 
 @end

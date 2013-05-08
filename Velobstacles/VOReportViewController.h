@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VOCategoryListVC.h"
 
-@interface VOReportViewController : UITableViewController
+@interface VOReportViewController : UITableViewController <VOCategoryTableViewDelegate>
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender;
 - (IBAction)submitAction:(UIBarButtonItem *)sender;
