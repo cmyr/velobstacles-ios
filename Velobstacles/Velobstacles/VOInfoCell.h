@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface VOInfoCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end

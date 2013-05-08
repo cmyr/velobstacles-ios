@@ -10,4 +10,7 @@
 
 @interface VOReportViewController : UITableViewController
 
+- (IBAction)cancelAction:(UIBarButtonItem *)sender;
+- (IBAction)submitAction:(UIBarButtonItem *)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *submitButton;
 @end

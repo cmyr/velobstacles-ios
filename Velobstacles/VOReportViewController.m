@@ -8,6 +8,11 @@
 
 #import "VOReportViewController.h"
 #import "VOReport.h"
+#import "VOInfoCell.h"
+#import "VOCategoryCell.h"
+#import "VODescriptionCell.h"
+#import "VOPhotoCell.h"
+
 
 @interface VOReportViewController ()
 @property (strong, nonatomic) VOReport* report;
@@ -62,10 +67,10 @@
     return 0;
 }
 
-#define INFO_CELL_ID @"Info Cell"
-#define CATEGORY_CELL_ID @"category"
-#define DESCRIPTION_CELL_ID @"description"
-#define PHOTO_CELL_ID @"photo"
+//#define INFO_CELL_ID @"Info Cell"
+//#define CATEGORY_CELL_ID @"category"
+//#define DESCRIPTION_CELL_ID @"description"
+//#define PHOTO_CELL_ID @"photo"
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *infoCellID = @"info";
@@ -74,31 +79,30 @@
     static NSString *photoCellID = @"photo";
 
     NSLog(@"%@",indexPath);
-    UITableViewCell* cell;
     if (indexPath.section == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:infoCellID];
-        cell.textLabel.text = [self.report.timestamp descriptionWithLocale:[NSLocale currentLocale]];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"(%g, %g)",
-                                     self.report.location.latitude,
-                                     self.report.location.longitude];
+       VOInfoCell* cell = (VOInfoCell*)[tableView dequeueReusableCellWithIdentifier:infoCellID];
+        cell.dateLabel.text = [self.report.timestamp descriptionWithLocale:[NSLocale currentLocale]];
+        return cell;
     }else if (indexPath.section == 1 && indexPath.row == 0){
-        cell = [tableView dequeueReusableCellWithIdentifier:catCellID];
-        cell.textLabel.text = @"Category";
-        cell.detailTextLabel.text = self.report.category;
+       VOCategoryCell* cell = (VOCategoryCell*)[tableView dequeueReusableCellWithIdentifier:catCellID];
+        cell.textLabel.text = self.report.category;
+        return cell;
     }else if (indexPath.section == 1 && indexPath.row == 1){
-        cell = [tableView dequeueReusableCellWithIdentifier:descCellID];
-        cell.textLabel.text = @"Description";
-        cell.detailTextLabel.text = self.report.description;
+       VODescriptionCell* cell = (VODescriptionCell*)[tableView dequeueReusableCellWithIdentifier:descCellID];
+        cell.textLabel.text = self.report.description;
+        return cell;
     }else if (indexPath.section == 1 && indexPath.row == 2){
-        cell = [tableView dequeueReusableCellWithIdentifier:photoCellID];
-        cell.textLabel.text = @"Add Photo";
-    }    
-    return cell;
+       VOPhotoCell* cell = (VOPhotoCell*)[tableView dequeueReusableCellWithIdentifier:photoCellID];
+        return cell;
+    }
+    NSLog(@"indexPath not handled in cellForRowAtIndexPath?");
+    return nil;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat cellHeight = 44.0;
     if (indexPath.section == 1 && indexPath.row == 1) cellHeight = 96.0;
+    if (indexPath.section == 1 && indexPath.row == 2) cellHeight = 128.0;
     return cellHeight;
 }
 /*
@@ -153,4 +157,14 @@
      */
 }
 
+- (IBAction)cancelAction:(UIBarButtonItem *)sender {
+    [[self presentingViewController]dismissViewControllerAnimated:YES completion:^{}];
+}
+
+- (IBAction)submitAction:(UIBarButtonItem *)sender {
+}
+- (void)viewDidUnload {
+    [self setSubmitButton:nil];
+    [super viewDidUnload];
+}
 @end
