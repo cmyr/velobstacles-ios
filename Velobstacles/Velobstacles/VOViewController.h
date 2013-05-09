@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <CoreLocation/CoreLocation.h>
 @class MKMapView;
-@interface VOViewController : UIViewController
+@interface VOViewController : UIViewController <CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)reportAction:(UIBarButtonItem *)sender;

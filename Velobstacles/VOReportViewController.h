@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "VOCategoryListVC.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface VOReportViewController : UITableViewController <VOCategoryTableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+@interface VOReportViewController : UITableViewController <VOCategoryTableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, CLLocationManagerDelegate>
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender;
-//- (IBAction)submitAction:(UIBarButtonItem *)sender;
-@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+@property (strong, nonatomic) CLLocationManager* locationManager;
 
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
 // cell outlets
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;

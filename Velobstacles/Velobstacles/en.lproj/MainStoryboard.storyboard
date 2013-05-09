@@ -22,7 +22,7 @@
                                     <barButtonItem title="New Report" id="Xzp-N9-9De">
                                         <connections>
                                             <action selector="reportAction:" destination="2" id="G06-3m-2yy"/>
-                                            <segue destination="y3t-ML-BBp" kind="modal" id="Ysg-vh-EvQ"/>
+                                            <segue destination="y3t-ML-BBp" kind="modal" identifier="reportSegue" modalTransitionStyle="flipHorizontal" id="4DN-ZC-NKf"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

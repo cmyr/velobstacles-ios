@@ -8,14 +8,17 @@
 //
 
 #import "VOReportViewController.h"
+#import "VOViewController.h"
 #import "VOReport.h"
-#import "VOServerHandler.h";
-
+#import "VOServerHandler.h"
 
 
 @interface VOReportViewController ()
 @property (strong, nonatomic) VOReport* report;
 @property (strong, nonatomic) UIImagePickerController* imagePicker;
+@property (strong, nonatomic) CLLocation* location;
+
+
 @end
 
 @implementation VOReportViewController
@@ -24,8 +27,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.report = [VOReport testReport];
-        //TODO: this is for testing
+       
     }
     return self;
 }
@@ -35,16 +37,22 @@
     [super viewDidLoad];
     self.report = [[VOReport alloc]init];
     self.report.timestamp = [NSDate date];
-    CLLocationCoordinate2D coord;
-    coord.longitude = ((arc4random() % 500)*0.0001f) + -73.6;
-    coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;
-    self.report.location = coord;
-
+//    CLLocationCoordinate2D coord;
+//    coord.longitude = ((arc4random() % 500)*0.0001f) + -73.6;
+//    coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;
+//    self.report.location = coord;
     self.descriptionText.delegate = self;
 //    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
 //    [formatter setDateStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.report.timestamp
                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
+    [self startLocationManager];
+}
+
+//lazy instantiators
+-(CLLocationManager*)locationManager{
+    if (!_locationManager) _locationManager = [[CLLocationManager alloc]init];
+    return _locationManager;
 }
 
 -(UIImagePickerController*)imagePicker
@@ -53,6 +61,7 @@
 	return _imagePicker;
 }
 
+//check to see if we have a valid reoprt
 -(void)validateReportContents{
     BOOL reportValid = YES;
     if (!self.report.category || [self.report.category isEqualToString:@""]) reportValid = NO;
@@ -65,6 +74,7 @@
 
 }
 
+//enable/disable the submission button
 -(void)enableSubmission:(BOOL)flag{
     if (flag){
         self.submitButtonCell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -79,7 +89,15 @@
     //TODO: if report doesn't include some fields, show alert
     [VOServerHandler postReport:self.report];
     //probably show a spinner or something?
-    [[self presentingViewController]dismissModalViewControllerAnimated:YES];
+    [self dismissSelf];
+}
+
+- (IBAction)cancelAction:(UIBarButtonItem *)sender {
+    [self dismissSelf];
+}
+
+-(void)dismissSelf{
+    [[self presentingViewController]dismissViewControllerAnimated:YES completion:^{}];
 }
 #pragma mark - Table view data source
 
@@ -119,11 +137,6 @@
         [self submitReport];
     }
 }
-
-- (IBAction)cancelAction:(UIBarButtonItem *)sender {
-    [[self presentingViewController]dismissViewControllerAnimated:YES completion:^{}];
-}
-
 
 #pragma mark - segues and report delegates
 
@@ -237,46 +250,73 @@
     self.photoLabel.hidden = YES;
     self.changePhotoLabel.hidden = NO;
     self.photoImageView.image = self.report.image;
-    
-//    self.photoImageView.frame = [[self.photoImageView superview] frame];
-    //    if (self.report.image.size.width < self.photoImageView.bounds.size.width){
-//    self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-//    }else{
-//    self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
-//    }
-    //    [self newPatternFromImagePickerInfo:info];
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+#pragma mark - location handling
+
+-(void)startLocationManager{
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
+    
+}
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    self.location = [locations lastObject];
+    NSLog(@"report recieved location: %@ accuracy: %g", self.location, self.location.horizontalAccuracy);
+    if (self.location.horizontalAccuracy < 10){
+//        desired accuracy: stop location updating
+        self.locationManager.delegate = nil;
+        [self.locationManager stopUpdatingLocation];
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    if ([error domain] == kCLErrorDomain) {
+        switch ([error code]){
+            case kCLErrorLocationUnknown: NSLog(@"%@",error); break;
+            case kCLErrorDenied:
+                [manager stopUpdatingLocation];
+                self.location = nil;
+                [self locationManagerFailed];
+                //handling location == nil in report validation?
+                //TODO: see if we want to do this differently
+                break;
+            default:
+                NSLog(@"other location manager error: %@",error);
+        }
+    }
+    
+}
+
+-(void)locationManagerFailed{
+//    TODO: check if it's an authorization problem or not?
+    //and then show an alert or something probably
+}
+    
+
+#pragma mark - helper methods
 
 #define TARGET_EDGE_LENGTH 800.0
 //resizing uiimages:
 - (UIImage*)scaledImageForImage:(UIImage*)image
 {
+    //no idea why resizing UIImages is still this involved
     CGFloat edge, scale;
     edge = image.size.width > image.size.height ? image.size.width : image.size.height;
     if (edge > TARGET_EDGE_LENGTH) return image;
     scale = TARGET_EDGE_LENGTH / edge;
     CGSize newSize = CGSizeMake(image.size.width * scale, image.size.height * scale);
-    // Create a graphics image context
     UIGraphicsBeginImageContext(newSize);
-    
-    // Tell the old image to draw in this new context, with the desired
-    // new size
     [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    
-    // Get the new image from the context
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // End the context
     UIGraphicsEndImageContext();
-    
-    // Return the new image.
     return newImage;
 }
+
 - (void)viewDidUnload {
     [self setDateLabel:nil];
     [self setCategoryLabel:nil];
