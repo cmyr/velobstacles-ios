@@ -35,11 +35,6 @@
 		62B4EEFB17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
 		62B4EEFC17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
 		6B2755EC173AB0EB0046B485 /* VOCategoryListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */; };
-		6B2755EF173AD2DC0046B485 /* VODescriptionEntryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2755EE173AD2DC0046B485 /* VODescriptionEntryVC.m */; };
-		6BBB74CA1739BA3D00884950 /* VOInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB74C91739BA3D00884950 /* VOInfoCell.m */; };
-		6BBB74CD1739BA6800884950 /* VOCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB74CC1739BA6800884950 /* VOCategoryCell.m */; };
-		6BBB74D01739BA7900884950 /* VODescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB74CF1739BA7900884950 /* VODescriptionCell.m */; };
-		6BBB74D31739BA8A00884950 /* VOPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBB74D21739BA8900884950 /* VOPhotoCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,16 +82,6 @@
 		62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VOReportViewController.m; path = ../VOReportViewController.m; sourceTree = "<group>"; };
 		6B2755EA173AB0EB0046B485 /* VOCategoryListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOCategoryListVC.h; sourceTree = "<group>"; };
 		6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOCategoryListVC.m; sourceTree = "<group>"; };
-		6B2755ED173AD2DC0046B485 /* VODescriptionEntryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VODescriptionEntryVC.h; sourceTree = "<group>"; };
-		6B2755EE173AD2DC0046B485 /* VODescriptionEntryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VODescriptionEntryVC.m; sourceTree = "<group>"; };
-		6BBB74C81739BA3D00884950 /* VOInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOInfoCell.h; sourceTree = "<group>"; };
-		6BBB74C91739BA3D00884950 /* VOInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOInfoCell.m; sourceTree = "<group>"; };
-		6BBB74CB1739BA6800884950 /* VOCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOCategoryCell.h; sourceTree = "<group>"; };
-		6BBB74CC1739BA6800884950 /* VOCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOCategoryCell.m; sourceTree = "<group>"; };
-		6BBB74CE1739BA7900884950 /* VODescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VODescriptionCell.h; sourceTree = "<group>"; };
-		6BBB74CF1739BA7900884950 /* VODescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VODescriptionCell.m; sourceTree = "<group>"; };
-		6BBB74D11739BA8900884950 /* VOPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOPhotoCell.h; sourceTree = "<group>"; };
-		6BBB74D21739BA8900884950 /* VOPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOPhotoCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,13 +152,10 @@
 				62325B1A17383A43009135BF /* VOReport.m */,
 				6B2755EA173AB0EB0046B485 /* VOCategoryListVC.h */,
 				6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */,
-				6B2755ED173AD2DC0046B485 /* VODescriptionEntryVC.h */,
-				6B2755EE173AD2DC0046B485 /* VODescriptionEntryVC.m */,
 				625928BD1737154E00866F54 /* VOViewController.h */,
 				625928BE1737154E00866F54 /* VOViewController.m */,
 				62B4EEF917396CC70096C9F8 /* VOReportViewController.h */,
 				62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */,
-				6BBB74C71739B9E400884950 /* TableViewCells */,
 				62B4EEF71739623D0096C9F8 /* pin2.png */,
 				62325B21173850E4009135BF /* pothole.jpg */,
 				625928A91737154E00866F54 /* Supporting Files */,
@@ -214,21 +196,6 @@
 				625928CF1737154E00866F54 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6BBB74C71739B9E400884950 /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				6BBB74C81739BA3D00884950 /* VOInfoCell.h */,
-				6BBB74C91739BA3D00884950 /* VOInfoCell.m */,
-				6BBB74CB1739BA6800884950 /* VOCategoryCell.h */,
-				6BBB74CC1739BA6800884950 /* VOCategoryCell.m */,
-				6BBB74CE1739BA7900884950 /* VODescriptionCell.h */,
-				6BBB74CF1739BA7900884950 /* VODescriptionCell.m */,
-				6BBB74D11739BA8900884950 /* VOPhotoCell.h */,
-				6BBB74D21739BA8900884950 /* VOPhotoCell.m */,
-			);
-			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,12 +318,7 @@
 				62797BEA1737FB200061FECA /* VOServerHandler.m in Sources */,
 				62325B1B17383A43009135BF /* VOReport.m in Sources */,
 				62B4EEFB17396CC70096C9F8 /* VOReportViewController.m in Sources */,
-				6BBB74CA1739BA3D00884950 /* VOInfoCell.m in Sources */,
-				6BBB74CD1739BA6800884950 /* VOCategoryCell.m in Sources */,
-				6BBB74D01739BA7900884950 /* VODescriptionCell.m in Sources */,
-				6BBB74D31739BA8A00884950 /* VOPhotoCell.m in Sources */,
 				6B2755EC173AB0EB0046B485 /* VOCategoryListVC.m in Sources */,
-				6B2755EF173AD2DC0046B485 /* VODescriptionEntryVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
