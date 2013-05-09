@@ -36,7 +36,7 @@
     CLLocationCoordinate2D coord;
     coord.longitude = ((arc4random() % 500)*0.0001f) + -73.6;
     coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;
-    report.location = coord;
+    report.coordinate = coord;
     report.timestamp = [NSDate date];
     report.category = [NSString stringWithFormat:@"This Bike Path Sucks"];
     report.description = @"and so after all of this time it came to pass that many strange things had happened, and we decided ultimately to let it wash away, like dust in early rains, this mess we'd made of life";

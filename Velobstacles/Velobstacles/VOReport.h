@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSNumber* reportID;
 @property (nonatomic, strong) NSDate* timestamp;
 @property (nonatomic, strong) NSString* category;
-@property (nonatomic) CLLocationCoordinate2D location;
+@property (nonatomic) CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) NSString* description;
 @property (nonatomic) BOOL debug;
 @property (nonatomic) BOOL hasPhoto;

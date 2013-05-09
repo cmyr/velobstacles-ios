@@ -13,4 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)reportAction:(UIBarButtonItem *)sender;
+
+//debug
+@property (weak, nonatomic) IBOutlet UILabel *debugLabel;
 @end
