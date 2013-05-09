@@ -9,14 +9,12 @@
 
 #import "VOReportViewController.h"
 #import "VOReport.h"
-#import "VOInfoCell.h"
-#import "VOCategoryCell.h"
-#import "VODescriptionCell.h"
-#import "VOPhotoCell.h"
+
 
 
 @interface VOReportViewController ()
 @property (strong, nonatomic) VOReport* report;
+@property (strong, nonatomic) UIImagePickerController* imagePicker;
 @end
 
 @implementation VOReportViewController
@@ -46,15 +44,13 @@
 //    [formatter setDateStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.report.timestamp
                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
-    
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(UIImagePickerController*)imagePicker
+{
+	if (!_imagePicker) _imagePicker = [[UIImagePickerController alloc]init];
+	return _imagePicker;
+}
 
 #pragma mark - Table view data source
 /*
@@ -135,7 +131,7 @@
         [self.descriptionText becomeFirstResponder];
     }else if (indexPath.section == 1 && indexPath.row == 2){
         [self.descriptionText resignFirstResponder];
-        //handle media picking here
+        [self showImagePickerActionSheet];
     }
     
     // Navigation logic may go here. Create and push another view controller.
@@ -202,12 +198,100 @@
     }
 }
 
+//VOCategoryTableViewDelegate method:
 -(void)categoryRecieved:(NSString *)category{
     self.report.category = category;
     self.categoryLabel.text = category;
-//    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+#define CAMERA_TITLE_STRING @"From Camera"
+#define PHOTOPICKER_TITLE_STRING @"From Photo Roll"
+
+-(void)showImagePickerActionSheet{
+    UIActionSheet* imagePickerActionSheet = [[UIActionSheet alloc]initWithTitle:@"Add Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:CAMERA_TITLE_STRING, PHOTOPICKER_TITLE_STRING, nil];
+    [imagePickerActionSheet showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	NSString* action = [actionSheet buttonTitleAtIndex:buttonIndex];
+	if ([action isEqualToString:CAMERA_TITLE_STRING]){
+		[self takePhoto];
+	}else if ([action isEqualToString:PHOTOPICKER_TITLE_STRING]){
+		[self choosePhoto];
+    }
+}
+
+-(void)takePhoto
+{
+    
+	if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+	{
+		[self.imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+		[self.imagePicker setCameraFlashMode:UIImagePickerControllerCameraFlashModeOff];
+		self.imagePicker.allowsEditing = YES;
+	}
+	else{
+		[self.imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+		self.imagePicker.allowsEditing = YES;
+	}
+	[self.imagePicker setDelegate:self];
+	[self presentViewController:self.imagePicker animated:YES completion:NULL];
+}
+
+-(void)choosePhoto
+{
+	[self.imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+	[self.imagePicker setDelegate:self];
+	[self presentViewController:self.imagePicker animated:YES completion:NULL];
+	self.imagePicker.allowsEditing = YES;
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+	[self dismissModalViewControllerAnimated:YES];
+    self.report.image = [self scaledImageForImage:info[@"UIImagePickerControllerEditedImage"]];
+    self.photoLabel.hidden = YES;
+    self.photoImageView.image = self.report.image;
+//    if (self.report.image.size.width < self.photoImageView.bounds.size.width){
+//    self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
+//    }else{
+//    self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
+//    }
+    //    [self newPatternFromImagePickerInfo:info];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+#define TARGET_EDGE_LENGTH 800.0
+//resizing uiimages:
+- (UIImage*)scaledImageForImage:(UIImage*)image
+{
+    CGFloat edge, scale;
+    edge = image.size.width > image.size.height ? image.size.width : image.size.height;
+    if (edge > TARGET_EDGE_LENGTH) return image;
+    scale = TARGET_EDGE_LENGTH / edge;
+    CGSize newSize = CGSizeMake(image.size.width * scale, image.size.height * scale);
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
 - (void)viewDidUnload {
     [self setDateLabel:nil];
     [self setCategoryLabel:nil];
