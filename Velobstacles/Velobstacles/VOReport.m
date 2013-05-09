@@ -18,13 +18,20 @@
 
 //returns a dictionary categories mapped to their id n°s
 +(NSDictionary*)categories{
-    NSDictionary* categories = @{
-                                @0: @"Éclairage insuffisant",
-                                @1: @"Qualité de la chaussée",
-                                @2: @"Piste cyclable discontinue",
-                                @3: @"Piste cyclable nonexistante",
-                                @4: @"Chantier",
-                                @5: @"voiture(s) stationnée(e)"};
+    static NSDictionary* categories;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+       //block for setting up our categories dictionary;
+        categories = @{
+                       @0: @"Éclairage insuffisant",
+                       @1: @"Qualité de la chaussée",
+                       @2: @"Piste cyclable discontinue",
+                       @3: @"Piste cyclable nonexistante",
+                       @4: @"Chantier",
+                       @5: @"voiture(s) stationnée(e)"};
+
+    });
+    
     return categories;
 }
 
@@ -43,5 +50,37 @@
     return report;
 }
 
+#pragma mark - NSCoding protocol methods
 
+#define REPORT_ID_KEY @"report key"
+#define TIMESTAMP_KEY @"timestamp key"
+#define CATEGORY_KEY @"category key"
+#define COORDINATE_KEY @"coordinate key"
+#define DESCRIPTION_KEY @"description key"
+#define IMAGE_KEY @"image key"
+
+
+
+-(void)encodeWithCoder:(NSCoder *)coder{
+    [coder encodeObject:self.reportID forKey:REPORT_ID_KEY];
+    [coder encodeObject:self.timestamp forKey:TIMESTAMP_KEY];
+    [coder encodeObject:self.category forKey:CATEGORY_KEY];
+    [coder encodeObject:[NSValue valueWithMKCoordinate:self.coordinate] forKey:COORDINATE_KEY];
+    [coder encodeObject:self.description forKey:DESCRIPTION_KEY];
+    [coder encodeObject:self.image forKey:IMAGE_KEY];
+    
+}
+
+-(id)initWithCoder:(NSCoder *)decoder{
+    self = [super init];
+    if (self) {
+        _reportID = [decoder decodeObjectForKey:REPORT_ID_KEY];
+        _timestamp = [decoder decodeObjectForKey:TIMESTAMP_KEY];
+        _category = [decoder decodeObjectForKey:CATEGORY_KEY];
+        _coordinate = [(NSValue*)[decoder decodeObjectForKey:COORDINATE_KEY]MKCoordinateValue];
+        _description = [decoder decodeObjectForKey:DESCRIPTION_KEY];
+        _image = [decoder decodeObjectForKey:IMAGE_KEY];
+    }
+    return self;
+}
 @end
