@@ -8,6 +8,7 @@
 
 #import "VelobstaclesTests.h"
 #import "VOServerHandler.h"
+#import "VOReport.h"
 #import <CoreLocation/CoreLocation.h>
 @implementation VelobstaclesTests
 
@@ -30,22 +31,31 @@
 //    STFail(@"Unit tests are not implemented yet in VelobstaclesTests");
 }
 
--(void)testFetch
-{
-    NSDictionary* dict = [VOServerHandler getTest];
-    NSArray* data = dict[@"data"];
-    
-    for (id obj in data){
-        NSLog(@"%@", obj);
-    }
-    
-    STAssertNotNil(dict, @"fetching dictionary from server");
-}
+//-(void)testFetch
+//{
+//    NSDictionary* dict = [VOServerHandler getTest];
+//    NSArray* data = dict[@"data"];
+//    
+//    for (id obj in data){
+//        NSLog(@"%@", obj);
+//    }
+//    
+//    STAssertNotNil(dict, @"fetching dictionary from server");
+//}
 
--(void)testImageFetch
+//-(void)testImageFetch
+//{
+//    UIImage* anImage = [VOServerHandler getImageTest];
+//    STAssertNotNil(@"rups", @"cheating hi");
+//}
+
+-(void)testSingleton
 {
-    UIImage* anImage = [VOServerHandler getImageTest];
-    STAssertNotNil(@"rups", @"cheating hi");
+    NSDictionary *dictOne, *dictTwo;
+    dictOne = [VOReport categories];
+    dictTwo = [VOReport categories];
+    STAssertEqualObjects(dictOne, dictTwo, @"singletons working");
+
 }
 
 //-(void)testPost

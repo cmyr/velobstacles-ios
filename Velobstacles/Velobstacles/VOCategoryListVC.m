@@ -60,7 +60,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     cell.textLabel.text = [self.categories objectForKey:[NSNumber numberWithUnsignedInteger:indexPath.row]];
-    if ([cell.textLabel.text isEqualToString:[[self.delegate report]category]]) cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if ([cell.textLabel.text isEqualToString:[[self.delegate report]categoryString]]) cell.accessoryType = UITableViewCellAccessoryCheckmark;
     // Configure the cell...
     
     return cell;
@@ -71,14 +71,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate categoryRecieved:[self categoryForIndexPath:indexPath]];
+    [self.delegate categoryRecieved:[NSNumber numberWithInteger:indexPath.row]];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
 
--(NSString*)categoryForIndexPath:(NSIndexPath *)indexPath{
-    NSNumber *key = [NSNumber numberWithUnsignedInteger:indexPath.row];
-    return self.categories[key];
-}
+//-(NSString*)categoryForIndexPath:(NSIndexPath *)indexPath{
+//    NSNumber *key = [NSNumber numberWithUnsignedInteger:indexPath.row];
+//    return self.categories[key];
+//}
 
 @end

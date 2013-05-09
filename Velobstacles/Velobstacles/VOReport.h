@@ -21,6 +21,9 @@
 
 @property (nonatomic, strong) UIImage* image;
 
+-(NSString*)categoryString;
+
+//class methods
 +(VOReport*)reportWithDict:(NSDictionary*)dict;
 +(VOReport*)testReport;
 +(NSDictionary*)categories;

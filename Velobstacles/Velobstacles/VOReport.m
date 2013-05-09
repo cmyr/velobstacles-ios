@@ -50,6 +50,10 @@
     return report;
 }
 
+-(NSString*)categoryString{
+    return [[VOReport categories]objectForKey:self.category];
+}
+
 #pragma mark - NSCoding protocol methods
 
 #define REPORT_ID_KEY @"report key"

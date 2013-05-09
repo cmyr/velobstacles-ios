@@ -10,7 +10,7 @@
 @class VOReport;
 
 @protocol VOCategoryTableViewDelegate <NSObject>
--(void)categoryRecieved:(NSString*)category;
+-(void)categoryRecieved:(NSNumber*)category;
 -(VOReport*)report;
 //@property (strong, nonatomic) VOReport *report;
 @end

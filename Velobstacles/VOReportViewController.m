@@ -17,6 +17,7 @@
 @property (strong, nonatomic) VOReport* report;
 @property (strong, nonatomic) UIImagePickerController* imagePicker;
 @property (strong, nonatomic) CLLocation* location;
+@property (strong, nonatomic) NSDictionary *categories;
 
 
 @end
@@ -61,10 +62,15 @@
 	return _imagePicker;
 }
 
+-(NSDictionary*)categories{
+    if (!_categories) _categories = [VOReport categories];
+    return _categories;
+}
+
 //check to see if we have a valid reoprt
 -(void)validateReportContents{
     BOOL reportValid = YES;
-    if (!self.report.category || [self.report.category isEqualToString:@""]) reportValid = NO;
+    if (!self.report.category) reportValid = NO;
 //TODO: add location validation
     if (reportValid){
         [self enableSubmission:YES];
@@ -193,9 +199,9 @@
 }
 
 //VOCategoryTableViewDelegate method:
--(void)categoryRecieved:(NSString *)category{
+-(void)categoryRecieved:(NSNumber *)category{
     self.report.category = category;
-    self.categoryLabel.text = category;
+    self.categoryLabel.text = [self.categories objectForKey:category];
     [self validateReportContents];
 }
 
