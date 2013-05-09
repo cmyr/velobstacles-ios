@@ -24,11 +24,12 @@ typedef enum VOImageFormat : NSUInteger{
     VOImageFormatNormal
 }VOImageFormat;
 
+@class VOReport;
 
 @interface VOServerHandler : NSObject
 +(NSArray*)reportsForLocation:(CLLocationCoordinate2D)location radius:(CLLocationDistance)radius;
 +(UIImage*)imageForReport:(NSNumber*)reportID format:(VOImageFormat)format;
-+(void)postReport:(id)report;
++(void)postReport:(VOReport*)report;
 
 //tests
 +(NSDictionary*)getTest;

@@ -9,6 +9,7 @@
 
 #import "VOReportViewController.h"
 #import "VOReport.h"
+#import "VOServerHandler.h";
 
 
 
@@ -54,13 +55,31 @@
 
 -(void)validateReportContents{
     BOOL reportValid = YES;
-    if (!self.report.category) reportValid = NO;
+    if (!self.report.category || [self.report.category isEqualToString:@""]) reportValid = NO;
+//TODO: add location validation
     if (reportValid){
-        //enable submission
+        [self enableSubmission:YES];
     }else{
-        //disable submission 
+        [self enableSubmission:NO];
     }
 
+}
+
+-(void)enableSubmission:(BOOL)flag{
+    if (flag){
+        self.submitButtonCell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        self.submitButtonLabel.textColor = [UIColor blackColor];
+    }else{
+        self.submitButtonCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.submitButtonLabel.textColor = [UIColor grayColor];
+    }
+}
+
+-(void)submitReport{
+    //TODO: if report doesn't include some fields, show alert
+    [VOServerHandler postReport:self.report];
+    //probably show a spinner or something?
+    [[self presentingViewController]dismissModalViewControllerAnimated:YES];
 }
 #pragma mark - Table view data source
 
@@ -68,6 +87,7 @@
 #define DESCRIPTION_CELL_HEIGHT 96.0
 #define PHOTO_CELL_HEIGHT 128.0
 #define CELL_PADDING 16.0
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat cellHeight = DEFAULT_CELL_HEIGHT;
     if (indexPath.section == 1 && indexPath.row == 1){
@@ -77,7 +97,6 @@
     if (indexPath.section == 1 && indexPath.row == 2) cellHeight = PHOTO_CELL_HEIGHT;
     return cellHeight;
 }
-
 
 #pragma mark - Table view delegate
 #define CATEGORY_SEGUE @"categorySegue"
@@ -96,6 +115,8 @@
     }else if (indexPath.section == 1 && indexPath.row == 2){
         [self descriptionEditingFinished];
         [self showImagePickerActionSheet];
+    }else if ([indexPath isEqual:[tableView indexPathForCell:self.submitButtonCell]]){
+        [self submitReport];
     }
 }
 
@@ -147,6 +168,7 @@
         }
         [self.navBar setRightBarButtonItem:nil animated:NO];
     }
+    [self validateReportContents];
 }
 
 //used for selecting our category
@@ -161,6 +183,7 @@
 -(void)categoryRecieved:(NSString *)category{
     self.report.category = category;
     self.categoryLabel.text = category;
+    [self validateReportContents];
 }
 
 #define CAMERA_TITLE_STRING @"From Camera"
@@ -262,6 +285,8 @@
     [self setDescriptionText:nil];
     [self setNavBar:nil];
     [self setChangePhotoLabel:nil];
+    [self setSubmitButtonCell:nil];
+    [self setSubmitButtonLabel:nil];
     [super viewDidUnload];
 }
 

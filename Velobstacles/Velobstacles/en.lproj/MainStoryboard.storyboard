@@ -153,6 +153,28 @@ Photo</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="NaD-Je-zvS">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="category" id="gWs-Iz-NRb">
+                                        <rect key="frame" x="0.0" y="362" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Submit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tze-HG-RlD">
+                                                    <rect key="frame" x="20" y="6" width="260" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="ovM-Bb-Zkq" id="TeZ-gd-CHA"/>
@@ -174,6 +196,8 @@ Photo</string>
                         <outlet property="navBar" destination="VtO-du-oVE" id="aiF-yX-L7Y"/>
                         <outlet property="photoImageView" destination="wEe-yf-Qfv" id="ZO9-RK-MgN"/>
                         <outlet property="photoLabel" destination="DoI-kG-SZW" id="VqB-OE-1gU"/>
+                        <outlet property="submitButtonCell" destination="gWs-Iz-NRb" id="tDp-pZ-gmt"/>
+                        <outlet property="submitButtonLabel" destination="tze-HG-RlD" id="LWe-sT-7Xr"/>
                         <segue destination="jm7-66-xCh" kind="push" identifier="categorySegue" id="dZD-VJ-sgt"/>
                     </connections>
                 </tableViewController>

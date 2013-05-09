@@ -22,5 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *photoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *changePhotoLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UITableViewCell *submitButtonCell;
+@property (weak, nonatomic) IBOutlet UILabel *submitButtonLabel;
 
 @end
