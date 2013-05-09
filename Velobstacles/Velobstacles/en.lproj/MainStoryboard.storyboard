@@ -120,14 +120,14 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photo" rowHeight="128" id="zX6-hG-pxa">
+                                    <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photo" rowHeight="128" id="zX6-hG-pxa">
                                         <rect key="frame" x="0.0" y="213" width="320" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" id="wEe-yf-Qfv">
+                                                <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" id="wEe-yf-Qfv">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -140,12 +140,16 @@ Photo</string>
                                                     <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tap To Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kVU-39-y7e">
+                                                    <rect key="frame" x="20" y="53" width="257" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <connections>
-                                            <outlet property="imageView" destination="wEe-yf-Qfv" id="KbK-CQ-HLw"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -164,6 +168,7 @@ Photo</string>
                     </navigationItem>
                     <connections>
                         <outlet property="categoryLabel" destination="8kx-II-Myb" id="7Dm-6N-eTm"/>
+                        <outlet property="changePhotoLabel" destination="kVU-39-y7e" id="ZmJ-0h-f6V"/>
                         <outlet property="dateLabel" destination="awb-K6-F8b" id="T6f-yE-LCp"/>
                         <outlet property="descriptionText" destination="0A4-Lu-Zcf" id="x4f-I8-eZX"/>
                         <outlet property="navBar" destination="VtO-du-oVE" id="aiF-yX-L7Y"/>
@@ -243,30 +248,6 @@ Photo</string>
     <resources>
         <image name="pin2.png" width="15" height="24"/>
     </resources>
-    <classes>
-        <class className="VOCategoryListVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VOCategoryListVC.h"/>
-        </class>
-        <class className="VOReportViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VOReportViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelAction:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="descriptionText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="navBar" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="photoImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="photoLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="VOViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VOViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="reportAction:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

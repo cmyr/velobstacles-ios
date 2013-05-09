@@ -52,54 +52,17 @@
 	return _imagePicker;
 }
 
-#pragma mark - Table view data source
-/*
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-////#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 2;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-////#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    switch (section) {
-//        case 0: return 1; break;
-//        case 1: return 3; break;
-//    }
-//    return 0;
-//}
+-(void)validateReportContents{
+    BOOL reportValid = YES;
+    if (!self.report.category) reportValid = NO;
+    if (reportValid){
+        //enable submission
+    }else{
+        //disable submission 
+    }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *infoCellID = @"info";
-//    static NSString *catCellID = @"category";
-//    static NSString *descCellID = @"description";
-//    static NSString *photoCellID = @"photo";
-//
-//    NSLog(@"%@",indexPath);
-//    if (indexPath.section == 0) {
-//       VOInfoCell* cell = (VOInfoCell*)[tableView dequeueReusableCellWithIdentifier:infoCellID];
-//        cell.dateLabel.text = [self.report.timestamp descriptionWithLocale:[NSLocale currentLocale]];
-//        return cell;
-//    }else if (indexPath.section == 1 && indexPath.row == 0){
-//       VOCategoryCell* cell = (VOCategoryCell*)[tableView dequeueReusableCellWithIdentifier:catCellID];
-//        if (self.report.category) cell.textLabel.text = self.report.category;
-//        return cell;
-//    }else if (indexPath.section == 1 && indexPath.row == 1){
-//       VODescriptionCell* cell = (VODescriptionCell*)[tableView dequeueReusableCellWithIdentifier:descCellID];
-//       if (self.report.description) cell.textLabel.text = self.report.description;
-//        return cell;
-//    }else if (indexPath.section == 1 && indexPath.row == 2){
-//       VOPhotoCell* cell = (VOPhotoCell*)[tableView dequeueReusableCellWithIdentifier:photoCellID];
-//        return cell;
-//    }
-//    NSLog(@"indexPath not handled in cellForRowAtIndexPath?");
-//    return nil;
-//}
-*/
+}
+#pragma mark - Table view data source
 
 #define DEFAULT_CELL_HEIGHT 44.0
 #define DESCRIPTION_CELL_HEIGHT 96.0
@@ -124,22 +87,16 @@
 {
    
     if (indexPath.section == 1 && indexPath.row == 0){
-        [self.descriptionText resignFirstResponder];
+        [self descriptionEditingFinished];
         [self performSegueWithIdentifier:CATEGORY_SEGUE sender:self];
     }else if (indexPath.section == 1 && indexPath.row == 1){
 //        [self performSegueWithIdentifier:DESCRIPTION_SEGUE sender:self];
         [self.descriptionText becomeFirstResponder];
+        
     }else if (indexPath.section == 1 && indexPath.row == 2){
-        [self.descriptionText resignFirstResponder];
+        [self descriptionEditingFinished];
         [self showImagePickerActionSheet];
     }
-    
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender {
@@ -181,16 +138,18 @@
     
 }
 -(void)descriptionEditingFinished{
-    [self.descriptionText resignFirstResponder];
-    if ([self.descriptionText.text isEqualToString:@""]){
-        self.descriptionText.text = @"Description";
-    }else{
-        self.report.description = self.descriptionText.text;
+    if (self.descriptionText.isFirstResponder){
+        [self.descriptionText resignFirstResponder];
+        if ([self.descriptionText.text isEqualToString:@""]){
+            self.descriptionText.text = @"Description";
+        }else{
+            self.report.description = self.descriptionText.text;
+        }
+        [self.navBar setRightBarButtonItem:nil animated:NO];
     }
-    [self.navBar setRightBarButtonItem:nil animated:NO];
 }
 
-
+//used for selecting our category
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier]isEqualToString:CATEGORY_SEGUE]){
         VOCategoryListVC* vc = (VOCategoryListVC*)[segue destinationViewController];
@@ -253,8 +212,11 @@
 	[self dismissModalViewControllerAnimated:YES];
     self.report.image = [self scaledImageForImage:info[@"UIImagePickerControllerEditedImage"]];
     self.photoLabel.hidden = YES;
+    self.changePhotoLabel.hidden = NO;
     self.photoImageView.image = self.report.image;
-//    if (self.report.image.size.width < self.photoImageView.bounds.size.width){
+    
+//    self.photoImageView.frame = [[self.photoImageView superview] frame];
+    //    if (self.report.image.size.width < self.photoImageView.bounds.size.width){
 //    self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
 //    }else{
 //    self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -299,6 +261,7 @@
     [self setPhotoImageView:nil];
     [self setDescriptionText:nil];
     [self setNavBar:nil];
+    [self setChangePhotoLabel:nil];
     [super viewDidUnload];
 }
 
