@@ -265,9 +265,10 @@
     
 }
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    self.location = [locations lastObject];
-    NSLog(@"report recieved location: %@ accuracy: %g", self.location, self.location.horizontalAccuracy);
-    if (self.location.horizontalAccuracy < 10){
+    CLLocation* location = [locations lastObject];
+    if (location.horizontalAccuracy < self.location.horizontalAccuracy) self.location = location;
+    NSLog(@"report recieved location: %@ accuracy: %g", location, location.horizontalAccuracy);
+    if (self.location.horizontalAccuracy <= 10){
 //        desired accuracy: stop location updating
         self.locationManager.delegate = nil;
         [self.locationManager stopUpdatingLocation];

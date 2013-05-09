@@ -49,9 +49,26 @@
 }
 
 // posts a new report
-+(void)postReport:(NSDictionary*)report
+#define REPORTS_KEY @"reports"
++(void)postReport:(VOReport*)report
 {
-    
+    if (DEBUG_MODE){
+        //this is going to get ugly
+        //retrieve user defaults:
+        
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        NSMutableArray* reports = nil;
+        if (userDefaults) {
+            reports = [[userDefaults objectForKey:REPORTS_KEY]mutableCopy];
+            if (!reports) reports = [[NSMutableArray alloc]init];
+            [reports addObject:report];
+            [userDefaults setObject:[reports copy] forKey:REPORTS_KEY];
+            [userDefaults synchronize];
+        }
+    }else{
+//        handle whatever we'd normally do with a report
+    }
+
 
     
 }

@@ -11,11 +11,12 @@
 #import "VOReportViewController.h"
 #import "VOReport.h"
 
-#define IN_DEBUG_MODE 1
+
 
 @interface VOViewController ()
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) CLLocation* location;
+@property (strong, nonatomic) NSArray* reportsArray;
 @end
 
 @implementation VOViewController
@@ -24,12 +25,24 @@
 {
     [super viewDidLoad];
     [self getFirstLocation];
+    [self setAnnotations];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
 -(CLLocationManager*)locationManager{
     if (!_locationManager) _locationManager = [[CLLocationManager alloc]init];
     return _locationManager;
+}
+
+-(void)setAnnotations{
+    if (DEBUG_MODE){
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        if (userDefaults) {
+            self.reportsArray = [[userDefaults objectForKey:@"reports"]copy];
+        }
+    }else{
+//        actually populate locations somehow
+    }
 }
 
 #pragma mark - location handling
@@ -61,6 +74,7 @@
 
 #pragma mark - CLLocationManagerDelegate
 
+#define LOCATION_DEBUGGING_FLAG 0
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation* location = [locations lastObject];
     //FIXME: this is messy because of debugging
@@ -68,7 +82,7 @@
         self.location = location;
         [self centerMap:self.location];
     }
-    if (!IN_DEBUG_MODE){
+    if (!LOCATION_DEBUGGING_FLAG){
         self.locationManager.delegate = nil;
         [self.locationManager stopUpdatingLocation];
         NSLog(@"mapview received location: %@", self.location);
@@ -93,19 +107,6 @@
 
 #define REPORT_SEGUE @"reportSegue"
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//    if ([[segue identifier]isEqualToString:REPORT_SEGUE]){
-//         UINavigationController* vc = [segue destinationViewController];
-//        VOReportViewController* reportVC = (VOReportViewController*)[vc topViewController];
-////        change locationManager delegate to our report VC
-////        set locationmanager accuracy to high for reporting & start update fetching
-//        reportVC.locationManager = self.locationManager;
-//        self.locationManager.delegate = reportVC;
-//        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//        [self.locationManager startUpdatingLocation];
-//
-//    }
-//}
 
 - (IBAction)reportAction:(UIBarButtonItem *)sender {
 }

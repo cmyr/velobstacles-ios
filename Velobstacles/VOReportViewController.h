@@ -10,6 +10,8 @@
 #import "VOCategoryListVC.h"
 #import <CoreLocation/CoreLocation.h>
 
+extern BOOL DEBUG_MODE;
+
 @interface VOReportViewController : UITableViewController <VOCategoryTableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, CLLocationManagerDelegate>
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender;

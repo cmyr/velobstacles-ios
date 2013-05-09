@@ -11,6 +11,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+extern BOOL DEBUG_MODE;
+
 #define VO_LATITUDE @"lat"
 #define VO_LONGITUDE @"long"
 #define VO_RADIUS @"rad"

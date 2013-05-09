@@ -10,6 +10,8 @@
 
 #import "VOAppDelegate.h"
 
+BOOL DEBUG_MODE = YES;
+
 int main(int argc, char *argv[])
 {
     @autoreleasepool {

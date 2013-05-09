@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+
+extern BOOL DEBUG_MODE;
 @class MKMapView;
 @interface VOViewController : UIViewController <CLLocationManagerDelegate>
 
@@ -17,3 +19,5 @@
 //debug
 @property (weak, nonatomic) IBOutlet UILabel *debugLabel;
 @end
+
+
