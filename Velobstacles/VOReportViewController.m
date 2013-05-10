@@ -115,7 +115,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat cellHeight = DEFAULT_CELL_HEIGHT;
     if (indexPath.section == 1 && indexPath.row == 1){
-       CGFloat calculated_height = [self heightForTextView:self.descriptionText containingString:self.report.description];
+       CGFloat calculated_height = [self heightForTextView:self.descriptionText containingString:self.report.reportDescription];
         cellHeight = DESCRIPTION_CELL_HEIGHT >  calculated_height ? DESCRIPTION_CELL_HEIGHT : calculated_height + CELL_PADDING;
     }
     if (indexPath.section == 1 && indexPath.row == 2) cellHeight = PHOTO_CELL_HEIGHT;
@@ -148,7 +148,7 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
 //    show the done button, clear the textview if our report text is blank;
-    if ([self.report.description isEqualToString:@""] || !self.report.description) self.descriptionText.text = @"";
+    if ([self.report.reportDescription isEqualToString:@""] || !self.report.reportDescription) self.descriptionText.text = @"";
     self.navBar.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(descriptionEditingFinished)];
 }
 
@@ -172,7 +172,7 @@
 
 -(void)textViewDidChange:(UITextView *)textView{
     //recalculate height of textview as it is edited;
-    self.report.description = textView.text;
+    self.report.reportDescription = textView.text;
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
     
@@ -183,7 +183,7 @@
         if ([self.descriptionText.text isEqualToString:@""]){
             self.descriptionText.text = @"Description";
         }else{
-            self.report.description = self.descriptionText.text;
+            self.report.reportDescription = self.descriptionText.text;
         }
         [self.navBar setRightBarButtonItem:nil animated:NO];
     }
@@ -252,10 +252,10 @@
 {
     
 	[self dismissModalViewControllerAnimated:YES];
-    self.report.image = [self scaledImageForImage:info[@"UIImagePickerControllerEditedImage"]];
+    self.report.reportImage = [self scaledImageForImage:info[@"UIImagePickerControllerEditedImage"]];
     self.photoLabel.hidden = YES;
     self.changePhotoLabel.hidden = NO;
-    self.photoImageView.image = self.report.image;
+    self.photoImageView.image = self.report.reportImage;
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

@@ -10,16 +10,16 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@interface VOReport : NSObject <MKAnnotation, NSCoding>
+@interface VOReport : NSObject <MKAnnotation, NSCoding, NSCopying>
 @property (nonatomic, strong) NSNumber* reportID;
 @property (nonatomic, strong) NSDate* timestamp;
 @property (nonatomic, strong) NSNumber* category;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-@property (nonatomic, strong) NSString* description;
+@property (nonatomic, strong) NSString* reportDescription;
 @property (nonatomic) BOOL debug;
 @property (nonatomic) BOOL hasPhoto;
 
-@property (nonatomic, strong) UIImage* image;
+@property (nonatomic, strong) UIImage* reportImage;
 
 -(NSString*)categoryString;
 

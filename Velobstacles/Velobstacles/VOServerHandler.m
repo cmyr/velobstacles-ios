@@ -50,21 +50,22 @@
 
 // posts a new report
 #define REPORTS_KEY @"reports"
+#define TEST_FILEPATH @"com.cmyr.velobstacles.testdata1"
+
 +(void)postReport:(VOReport*)report
 {
     if (DEBUG_MODE){
         //this is going to get ugly
         //retrieve user defaults:
-        
-        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-        NSMutableArray* reports = nil;
-        if (userDefaults) {
-            reports = [[userDefaults objectForKey:REPORTS_KEY]mutableCopy];
-            if (!reports) reports = [[NSMutableArray alloc]init];
-            [reports addObject:report];
-            [userDefaults setObject:[reports copy] forKey:REPORTS_KEY];
-            [userDefaults synchronize];
-        }
+        NSMutableArray* reportsArray = [[self class]reportsForDebugging];
+        [reportsArray addObject:report];
+        //archive data after adding report? sure.
+        NSString* mypath  = [NSString stringWithFormat:@"%@/%@",
+                             [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                  NSUserDomainMask,
+                                                                  YES) lastObject],
+                             TEST_FILEPATH];
+        [NSKeyedArchiver archiveRootObject:report toFile:mypath];
     }else{
 //        handle whatever we'd normally do with a report
     }
@@ -73,8 +74,28 @@
     
 }
 
-#pragma mark tests
+#pragma mark - DEBUG local data storage
 
++(NSMutableArray*)reportsForDebugging{
+ //returns a singleton array that will hold our report objects
+    static NSMutableArray* debugReports;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString* mypath  = [NSString stringWithFormat:@"%@/%@",
+                             [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                  NSUserDomainMask,
+                                                                  YES) lastObject],
+                             TEST_FILEPATH];
+        NSLog(@"%@", mypath);
+//        [NSKeyedArchiver archiveRootObject:report toFile:mypath];
+        debugReports = [[NSKeyedUnarchiver unarchiveObjectWithFile:mypath]mutableCopy];
+        if (!debugReports) debugReports = [NSMutableArray array];
+    });
+        
+    return debugReports;
+}
+
+#pragma mark tests
 + (NSDictionary*)getTest{
     return [self fetchQueryWithArgs:nil];
 }

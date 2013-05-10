@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 extern BOOL DEBUG_MODE;
+
 @class MKMapView;
 @interface VOViewController : UIViewController <CLLocationManagerDelegate>
 

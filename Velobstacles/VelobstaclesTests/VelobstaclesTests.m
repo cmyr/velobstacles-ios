@@ -49,6 +49,22 @@
 //    STAssertNotNil(@"rups", @"cheating hi");
 //}
 
+-(void)testReportCopying{
+    VOReport* report = [VOReport testReport];
+    VOReport* reportCopy = [report copy];
+    
+    STAssertEqualObjects(report.category, reportCopy.category, @"report category copy equality");
+    STAssertEquals(report.coordinate, reportCopy.coordinate, @"report coordinate copy equality");
+    STAssertTrue([report.description isEqualToString:reportCopy.description], @"report description copy equality");
+    STAssertEqualObjects(report.timestamp, reportCopy.timestamp, @"report timestampe copy equality");
+//    STAssertEqualObjects(report.reportImage, reportCopy.reportImage, @"report image copy equality");
+    
+    UIImageWriteToSavedPhotosAlbum(reportCopy.reportImage, nil, nil, nil);
+
+    
+    
+}
+
 -(void)testSingleton
 {
     NSDictionary *dictOne, *dictTwo;
@@ -58,28 +74,28 @@
 
 }
 #define TEST_FILEPATH @"test_file_path"
--(void)testReportCoding
-{
-    VOReport* report = [VOReport testReport];
+//-(void)testReportCoding
+//{
+//    VOReport* report = [VOReport testReport];
 //    NSFileManager* manager = [NSFileManager defaultManager];
 //    NSError* error;
 //    NSURL *filepath = [manager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:[NSURL URLWithString:@"velotests"] create:YES error:&error];
 //    NSURL *fuckingURL = [filepath URLByAppendingPathComponent:@"AREYOUFUCKINGHAPPYNOW"];
 //    NSLog(@"%@", fuckingURL);
     
-    NSString* mypath  = [NSString stringWithFormat:@"%@/%@",
-                          [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                              NSUserDomainMask,
-                                                              YES) lastObject],
-                          TEST_FILEPATH];
-    NSLog(@"%@", mypath);
-    STAssertTrue([NSKeyedArchiver archiveRootObject:report toFile:mypath], @"archive success?");
-    VOReport *undeadReport = [NSKeyedUnarchiver unarchiveObjectWithFile:mypath];
-    STAssertTrue(undeadReport, @"unarchive successful?");
-    STAssertEqualObjects(report, undeadReport, @"reports equal?");
+//    NSString* mypath  = [NSString stringWithFormat:@"%@/%@",
+//                          [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+//                                                              NSUserDomainMask,
+//                                                              YES) lastObject],
+//                          TEST_FILEPATH];
+//    NSLog(@"%@", mypath);
+//    STAssertTrue([NSKeyedArchiver archiveRootObject:report toFile:mypath], @"archive success?");
+//    VOReport *undeadReport = [NSKeyedUnarchiver unarchiveObjectWithFile:mypath];
+//    STAssertTrue(undeadReport, @"unarchive successful?");
+//    STAssertEqualObjects(report, undeadReport, @"reports equal?");
+//    
     
-    
-}
+//}
 
 //-(void)testPost
 //{

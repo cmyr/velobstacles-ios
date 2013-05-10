@@ -46,8 +46,8 @@
     report.coordinate = coord;
     report.timestamp = [NSDate date];
     report.category = @2;
-    report.description = @"and so after all of this time it came to pass that many strange things had happened, and we decided ultimately to let it wash away, like dust in early rains, this mess we'd made of life";
-    report.image = [UIImage imageNamed:@"pothole.jpg"];
+    report.reportDescription = @"and so after all of this time it came to pass that many strange things had happened, and we decided ultimately to let it wash away, like dust in early rains, this mess we'd made of life";
+    report.reportImage = [UIImage imageNamed:@"pothole.jpg"];
     return report;
 }
 
@@ -55,7 +55,7 @@
     return [[VOReport categories]objectForKey:self.category];
 }
 
-#pragma mark - NSCoding protocol methods
+#pragma mark - coding/copying protocol methods
 
 #define REPORT_ID_KEY @"report key"
 #define TIMESTAMP_KEY @"timestamp key"
@@ -75,8 +75,8 @@
 //    [coder encodeObject:[NSValue valueWithMKCoordinate:self.coordinate] forKey:COORDINATE_KEY];
     [coder encodeDouble:self.coordinate.latitude forKey:LAT_KEY];
     [coder encodeDouble:self.coordinate.longitude forKey:LONG_KEY];
-    [coder encodeObject:self.description forKey:DESCRIPTION_KEY];
-    [coder encodeObject:self.image forKey:IMAGE_KEY];
+    [coder encodeObject:self.reportDescription forKey:DESCRIPTION_KEY];
+    [coder encodeObject:self.reportImage forKey:IMAGE_KEY];
     
 }
 
@@ -88,9 +88,26 @@
         _category = [decoder decodeObjectForKey:CATEGORY_KEY];
 //        _coordinate = [(NSValue*)[decoder decodeObjectForKey:COORDINATE_KEY]MKCoordinateValue];
         _coordinate = CLLocationCoordinate2DMake([decoder decodeDoubleForKey:LAT_KEY], [decoder decodeDoubleForKey:LONG_KEY]);
-        _description = [decoder decodeObjectForKey:DESCRIPTION_KEY];
-        _image = [decoder decodeObjectForKey:IMAGE_KEY];
+        _reportDescription = [decoder decodeObjectForKey:DESCRIPTION_KEY];
+        _reportImage = [decoder decodeObjectForKey:IMAGE_KEY];
     }
     return self;
+}
+
+-(id)copyWithZone:(NSZone*)zone{
+    id copy = [[[self class]alloc]init];
+    if (copy){
+        [copy setReportID:[self.reportID copyWithZone:zone]];
+        [copy setTimestamp:[self.timestamp copyWithZone:zone]];
+        [copy setCategory:[self.category copyWithZone:zone]];
+        [copy setCoordinate:self.coordinate];
+        [copy setReportDescription:[self.reportDescription copyWithZone:zone]];
+        [copy setReportImage:[[UIImage allocWithZone:zone]initWithCGImage:self.reportImage.CGImage]];
+    }
+    return copy;
+}
+
+-(NSString*)description{
+    return [NSString stringWithFormat:@"report ID: %@, timestamp: %@, category: %@, location: %g,%g, description: %@", self.reportID, self.timestamp, self.category, self.coordinate.latitude, self.coordinate.longitude, self.reportDescription];
 }
 @end
