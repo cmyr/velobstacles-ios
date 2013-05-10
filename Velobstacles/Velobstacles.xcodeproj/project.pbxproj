@@ -23,7 +23,7 @@
 		625928B71737154E00866F54 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 625928B61737154E00866F54 /* Default@2x.png */; };
 		625928B91737154E00866F54 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 625928B81737154E00866F54 /* Default-568h@2x.png */; };
 		625928BC1737154E00866F54 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 625928BA1737154E00866F54 /* MainStoryboard.storyboard */; };
-		625928BF1737154E00866F54 /* VOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 625928BE1737154E00866F54 /* VOViewController.m */; };
+		625928BF1737154E00866F54 /* VOMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 625928BE1737154E00866F54 /* VOMapViewController.m */; };
 		625928C71737154E00866F54 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928C61737154E00866F54 /* SenTestingKit.framework */; };
 		625928C81737154E00866F54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A21737154E00866F54 /* UIKit.framework */; };
 		625928C91737154E00866F54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625928A41737154E00866F54 /* Foundation.framework */; };
@@ -34,7 +34,6 @@
 		628E87A0173C680500A48F1F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623D6226173948ED00615032 /* CoreLocation.framework */; };
 		62B4EEF81739623D0096C9F8 /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 62B4EEF71739623D0096C9F8 /* pin2.png */; };
 		62B4EEFB17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
-		62B4EEFC17396CC70096C9F8 /* VOReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */; };
 		6B2755EC173AB0EB0046B485 /* VOCategoryListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */; };
 /* End PBXBuildFile section */
 
@@ -68,8 +67,8 @@
 		625928B61737154E00866F54 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		625928B81737154E00866F54 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		625928BB1737154E00866F54 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		625928BD1737154E00866F54 /* VOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VOViewController.h; sourceTree = "<group>"; };
-		625928BE1737154E00866F54 /* VOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VOViewController.m; sourceTree = "<group>"; };
+		625928BD1737154E00866F54 /* VOMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VOMapViewController.h; sourceTree = "<group>"; };
+		625928BE1737154E00866F54 /* VOMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VOMapViewController.m; sourceTree = "<group>"; };
 		625928C51737154E00866F54 /* VelobstaclesTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VelobstaclesTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		625928C61737154E00866F54 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		625928CE1737154E00866F54 /* VelobstaclesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VelobstaclesTests-Info.plist"; sourceTree = "<group>"; };
@@ -154,8 +153,8 @@
 				62325B1A17383A43009135BF /* VOReport.m */,
 				6B2755EA173AB0EB0046B485 /* VOCategoryListVC.h */,
 				6B2755EB173AB0EB0046B485 /* VOCategoryListVC.m */,
-				625928BD1737154E00866F54 /* VOViewController.h */,
-				625928BE1737154E00866F54 /* VOViewController.m */,
+				625928BD1737154E00866F54 /* VOMapViewController.h */,
+				625928BE1737154E00866F54 /* VOMapViewController.m */,
 				62B4EEF917396CC70096C9F8 /* VOReportViewController.h */,
 				62B4EEFA17396CC70096C9F8 /* VOReportViewController.m */,
 				62B4EEF71739623D0096C9F8 /* pin2.png */,
@@ -316,7 +315,7 @@
 			files = (
 				625928AF1737154E00866F54 /* main.m in Sources */,
 				625928B31737154E00866F54 /* VOAppDelegate.m in Sources */,
-				625928BF1737154E00866F54 /* VOViewController.m in Sources */,
+				625928BF1737154E00866F54 /* VOMapViewController.m in Sources */,
 				62797BEA1737FB200061FECA /* VOServerHandler.m in Sources */,
 				62325B1B17383A43009135BF /* VOReport.m in Sources */,
 				62B4EEFB17396CC70096C9F8 /* VOReportViewController.m in Sources */,
@@ -331,7 +330,6 @@
 				625928D41737154E00866F54 /* VelobstaclesTests.m in Sources */,
 				62797BEB1737FB200061FECA /* VOServerHandler.m in Sources */,
 				62325B1C17383A43009135BF /* VOReport.m in Sources */,
-				62B4EEFC17396CC70096C9F8 /* VOReportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

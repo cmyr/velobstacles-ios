@@ -29,14 +29,14 @@ typedef enum VOImageFormat : NSUInteger{
 @class VOReport;
 
 @interface VOServerHandler : NSObject
-+(NSArray*)reportsForLocation:(CLLocationCoordinate2D)location radius:(CLLocationDistance)radius;
++(NSArray*)reportsForRegion:(CLRegion*)region;
 +(UIImage*)imageForReport:(NSNumber*)reportID format:(VOImageFormat)format;
 +(void)postReport:(VOReport*)report;
 
 //tests
 +(NSDictionary*)getTest;
-+(NSDictionary*)getImageTest;
-+(void)postTest;
+//+(NSDictionary*)getImageTest;
+//+(void)postTest;
 
 +(NSMutableArray*)reportsForDebugging;
 @end

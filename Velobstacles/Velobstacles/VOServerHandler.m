@@ -21,14 +21,17 @@
 
 //fetches a list of reports from the server for a given lat/long/rad
 //returns reports as an NSArray
-+(NSArray*)reportsForLocation:(CLLocationCoordinate2D)location radius:(CLLocationDistance)radius
++(NSArray*)reportsForRegion:(CLRegion *)region
 {
+    if (DEBUG_MODE){
+        return [self reportsForDebugging];
+    }else{
     NSMutableDictionary* args = [NSMutableDictionary dictionary];
-    args[VO_LATITUDE] = [NSString stringWithFormat:@"%g", location.latitude];
-    args[VO_LONGITUDE] = [NSString stringWithFormat:@"%g", location.longitude];
-    args[VO_RADIUS] = [NSString stringWithFormat:@"%g", radius];
+    args[VO_LATITUDE] = [NSString stringWithFormat:@"%g", region.center.latitude];
+    args[VO_LONGITUDE] = [NSString stringWithFormat:@"%g", region.center.longitude];
+    args[VO_RADIUS] = [NSString stringWithFormat:@"%g", region.radius];
     return [self fetchQueryWithArgs:args][@"data"];
-//    return queryResult[@"data"];
+    }
 }
 
 // fetches an image for a given report

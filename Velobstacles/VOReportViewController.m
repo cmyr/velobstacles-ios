@@ -8,7 +8,7 @@
 //
 
 #import "VOReportViewController.h"
-#import "VOViewController.h"
+#import "VOMapViewController.h"
 #import "VOReport.h"
 #import "VOServerHandler.h"
 
@@ -251,7 +251,7 @@
     self.report.reportImage = [self scaledImageForImage:info[@"UIImagePickerControllerEditedImage"]];
     self.photoLabel.hidden = YES;
     self.changePhotoLabel.hidden = NO;
-    self.photoImageView.image = self.report.reportImage;
+//    self.photoImageView.image = self.report.reportImage;
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

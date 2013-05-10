@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 extern BOOL DEBUG_MODE;
 
-@class MKMapView;
-@interface VOViewController : UIViewController <CLLocationManagerDelegate>
+
+@interface VOMapViewController : UIViewController <MKMapViewDelegate,CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 - (IBAction)reportAction:(UIBarButtonItem *)sender;
