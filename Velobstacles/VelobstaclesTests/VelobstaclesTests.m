@@ -57,6 +57,29 @@
     STAssertEqualObjects(dictOne, dictTwo, @"singletons working");
 
 }
+#define TEST_FILEPATH @"test_file_path"
+-(void)testReportCoding
+{
+    VOReport* report = [VOReport testReport];
+//    NSFileManager* manager = [NSFileManager defaultManager];
+//    NSError* error;
+//    NSURL *filepath = [manager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:[NSURL URLWithString:@"velotests"] create:YES error:&error];
+//    NSURL *fuckingURL = [filepath URLByAppendingPathComponent:@"AREYOUFUCKINGHAPPYNOW"];
+//    NSLog(@"%@", fuckingURL);
+    
+    NSString* mypath  = [NSString stringWithFormat:@"%@/%@",
+                          [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                              NSUserDomainMask,
+                                                              YES) lastObject],
+                          TEST_FILEPATH];
+    NSLog(@"%@", mypath);
+    STAssertTrue([NSKeyedArchiver archiveRootObject:report toFile:mypath], @"archive success?");
+    VOReport *undeadReport = [NSKeyedUnarchiver unarchiveObjectWithFile:mypath];
+    STAssertTrue(undeadReport, @"unarchive successful?");
+    STAssertEqualObjects(report, undeadReport, @"reports equal?");
+    
+    
+}
 
 //-(void)testPost
 //{

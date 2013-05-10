@@ -45,8 +45,9 @@
     coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;
     report.coordinate = coord;
     report.timestamp = [NSDate date];
-    report.category = [NSString stringWithFormat:@"This Bike Path Sucks"];
+    report.category = @2;
     report.description = @"and so after all of this time it came to pass that many strange things had happened, and we decided ultimately to let it wash away, like dust in early rains, this mess we'd made of life";
+    report.image = [UIImage imageNamed:@"pothole.jpg"];
     return report;
 }
 
@@ -60,6 +61,8 @@
 #define TIMESTAMP_KEY @"timestamp key"
 #define CATEGORY_KEY @"category key"
 #define COORDINATE_KEY @"coordinate key"
+#define LAT_KEY @"lat key"
+#define LONG_KEY @"long key"
 #define DESCRIPTION_KEY @"description key"
 #define IMAGE_KEY @"image key"
 
@@ -69,7 +72,9 @@
     [coder encodeObject:self.reportID forKey:REPORT_ID_KEY];
     [coder encodeObject:self.timestamp forKey:TIMESTAMP_KEY];
     [coder encodeObject:self.category forKey:CATEGORY_KEY];
-    [coder encodeObject:[NSValue valueWithMKCoordinate:self.coordinate] forKey:COORDINATE_KEY];
+//    [coder encodeObject:[NSValue valueWithMKCoordinate:self.coordinate] forKey:COORDINATE_KEY];
+    [coder encodeDouble:self.coordinate.latitude forKey:LAT_KEY];
+    [coder encodeDouble:self.coordinate.longitude forKey:LONG_KEY];
     [coder encodeObject:self.description forKey:DESCRIPTION_KEY];
     [coder encodeObject:self.image forKey:IMAGE_KEY];
     
@@ -81,7 +86,8 @@
         _reportID = [decoder decodeObjectForKey:REPORT_ID_KEY];
         _timestamp = [decoder decodeObjectForKey:TIMESTAMP_KEY];
         _category = [decoder decodeObjectForKey:CATEGORY_KEY];
-        _coordinate = [(NSValue*)[decoder decodeObjectForKey:COORDINATE_KEY]MKCoordinateValue];
+//        _coordinate = [(NSValue*)[decoder decodeObjectForKey:COORDINATE_KEY]MKCoordinateValue];
+        _coordinate = CLLocationCoordinate2DMake([decoder decodeDoubleForKey:LAT_KEY], [decoder decodeDoubleForKey:LONG_KEY]);
         _description = [decoder decodeObjectForKey:DESCRIPTION_KEY];
         _image = [decoder decodeObjectForKey:IMAGE_KEY];
     }
