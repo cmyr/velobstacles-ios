@@ -18,9 +18,11 @@
 @property (nonatomic, strong) NSString* reportDescription;
 @property (nonatomic) BOOL debug;
 @property (nonatomic) BOOL hasPhoto;
-
 @property (nonatomic, strong) UIImage* reportImage;
 
+//MKAnnotation Protocol Methods
+@property (nonatomic, readonly, copy) NSString *title;
+@property (nonatomic, readonly, copy) NSString *subtitle;
 -(NSString*)categoryString;
 
 //class methods

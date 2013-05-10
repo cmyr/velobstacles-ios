@@ -38,13 +38,7 @@
     [super viewDidLoad];
     self.report = [[VOReport alloc]init];
     self.report.timestamp = [NSDate date];
-//    CLLocationCoordinate2D coord;
-//    coord.longitude = ((arc4random() % 500)*0.0001f) + -73.6;
-//    coord.latitude = ((arc4random() % 400)*0.0001f) + 45.49;
-//    self.report.location = coord;
     self.descriptionText.delegate = self;
-//    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-//    [formatter setDateStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.report.timestamp
                                                          dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
     [self startLocationManager];
@@ -93,6 +87,8 @@
 
 -(void)submitReport{
     //TODO: if report doesn't include some fields, show alert
+    //check for instance how good our coordinate is?
+    self.report.coordinate = self.location.coordinate;
     [VOServerHandler postReport:self.report];
     //probably show a spinner or something?
     [self dismissSelf];
@@ -251,7 +247,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     
-	[self dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:^{}];
     self.report.reportImage = [self scaledImageForImage:info[@"UIImagePickerControllerEditedImage"]];
     self.photoLabel.hidden = YES;
     self.changePhotoLabel.hidden = NO;
@@ -260,7 +256,7 @@
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 #pragma mark - location handling
 
@@ -272,9 +268,9 @@
 }
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation* location = [locations lastObject];
-    if (location.horizontalAccuracy < self.location.horizontalAccuracy) self.location = location;
+    if (!self.location || (location.horizontalAccuracy < self.location.horizontalAccuracy)) self.location = location;
     NSLog(@"report recieved location: %@ accuracy: %g", location, location.horizontalAccuracy);
-    if (self.location.horizontalAccuracy <= 10){
+    if (self.location.horizontalAccuracy <= 20){
 //        desired accuracy: stop location updating
         self.locationManager.delegate = nil;
         [self.locationManager stopUpdatingLocation];

@@ -65,7 +65,7 @@
                                                                   NSUserDomainMask,
                                                                   YES) lastObject],
                              TEST_FILEPATH];
-        [NSKeyedArchiver archiveRootObject:report toFile:mypath];
+        [NSKeyedArchiver archiveRootObject:reportsArray toFile:mypath];
     }else{
 //        handle whatever we'd normally do with a report
     }
@@ -88,7 +88,7 @@
                              TEST_FILEPATH];
         NSLog(@"%@", mypath);
 //        [NSKeyedArchiver archiveRootObject:report toFile:mypath];
-        debugReports = [[NSKeyedUnarchiver unarchiveObjectWithFile:mypath]mutableCopy];
+        debugReports = [NSKeyedUnarchiver unarchiveObjectWithFile:mypath];
         if (!debugReports) debugReports = [NSMutableArray array];
     });
         

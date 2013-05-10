@@ -38,4 +38,5 @@ typedef enum VOImageFormat : NSUInteger{
 +(NSDictionary*)getImageTest;
 +(void)postTest;
 
++(NSMutableArray*)reportsForDebugging;
 @end

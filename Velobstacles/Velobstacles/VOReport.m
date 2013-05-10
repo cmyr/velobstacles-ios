@@ -10,6 +10,15 @@
 
 @implementation VOReport
 
+
+-(NSString*)title{
+    return [self categoryString];
+}
+
+-(NSString*)subtitle{
+    return [NSDateFormatter localizedStringFromDate:self.timestamp dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+}
+
 //takes a dict as returned by server and converts to a VOReport object
 +(VOReport*)reportWithDict:(NSDictionary *)dict
 {

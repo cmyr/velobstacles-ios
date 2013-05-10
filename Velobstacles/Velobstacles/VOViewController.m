@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "VOReportViewController.h"
 #import "VOReport.h"
+#import "VOServerHandler.h"
 
 
 
@@ -36,11 +37,11 @@
 
 -(void)setAnnotations{
     if (DEBUG_MODE){
-        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-        if (userDefaults) {
-            self.reportsArray = [[userDefaults objectForKey:@"reports"]copy];
-        }
-    }else{
+        [self.mapView removeAnnotations:[self.mapView annotations]];
+        [self.mapView addAnnotations:[[VOServerHandler reportsForDebugging]copy]];
+        NSLog(@"added %lu annotations", (unsigned long)[self.mapView.annotations count]);
+        NSLog(@"%@", self.mapView.annotations);
+              }else{
 //        actually populate locations somehow
     }
 }
@@ -56,7 +57,7 @@
     
     CLLocationCoordinate2D centerCoordinate = location.coordinate;
     //    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(45.51, -73.57);
-    MKCoordinateSpan centerSpan = MKCoordinateSpanMake(.2, .2);
+    MKCoordinateSpan centerSpan = MKCoordinateSpanMake(.1, .1);
     MKCoordinateRegion centerRegion = MKCoordinateRegionMake(centerCoordinate, centerSpan);
     self.mapView.region = centerRegion;
     
@@ -109,5 +110,9 @@
 
 
 - (IBAction)reportAction:(UIBarButtonItem *)sender {
+    if (DEBUG_MODE) {
+        [self.mapView removeAnnotations:[self.mapView annotations]];
+        [self.mapView addAnnotations:[[VOServerHandler reportsForDebugging]copy]];
+    }
 }
 @end

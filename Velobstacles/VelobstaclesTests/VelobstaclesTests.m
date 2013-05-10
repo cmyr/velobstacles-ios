@@ -49,6 +49,18 @@
 //    STAssertNotNil(@"rups", @"cheating hi");
 //}
 
+-(void)testDataPersistence{
+    NSMutableArray* reportsArray = [VOServerHandler reportsForDebugging];
+    STAssertTrue((!reportsArray.count), @"reports array starts empty");
+    VOReport* aReport = [VOReport testReport];
+    [VOServerHandler postReport:aReport];
+    reportsArray = [VOServerHandler reportsForDebugging];
+    STAssertTrue((reportsArray.count == 1), @"reports array count == 1");
+    VOReport* anotherReport = [aReport copy];
+    [VOServerHandler postReport:anotherReport];
+    STAssertTrue((reportsArray.count == 2), @"reports array count == 2");
+    
+}
 -(void)testReportCopying{
     VOReport* report = [VOReport testReport];
     VOReport* reportCopy = [report copy];
