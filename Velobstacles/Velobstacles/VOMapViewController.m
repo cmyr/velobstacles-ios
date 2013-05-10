@@ -40,16 +40,6 @@
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView addAnnotations:self.reportsArray];
 }
-//-(void)setAnnotations{
-//    if (DEBUG_MODE){
-//        [self.mapView removeAnnotations:[self.mapView annotations]];
-//        [self.mapView addAnnotations:[[VOServerHandler reportsForDebugging]copy]];
-//        NSLog(@"added %lu annotations", (unsigned long)[self.mapView.annotations count]);
-//        NSLog(@"%@", self.mapView.annotations);
-//              }else{
-////        actually populate locations somehow
-//    }
-//}
 
 #pragma mark - location handling
 -(void)getFirstLocation{
@@ -115,6 +105,39 @@
     }
 }
 
+#define RESUSE_IDENTIFER @"report annotation"
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RESUSE_IDENTIFER];
+    
+    // Button
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    button.frame = CGRectMake(0, 0, 23, 23);
+    annotationView.rightCalloutAccessoryView = button;
+    
+    // Image and two labels
+//    UIView *leftCAV = [[UIView alloc] initWithFrame:CGRectMake(0,0,23,23)];
+    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 23, 23)];
+
+    annotationView.leftCalloutAccessoryView = imageView;
+    
+    annotationView.canShowCallout = YES;
+    
+    return annotationView;
+}
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+    //load image;
+//    UIActivityIndicatorView* spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    view.leftCalloutAccessoryView = spinner;
+//    [spinner startAnimating];
+//    now fetch the thumbnail;
+    VOReport* report = (VOReport*)[view annotation];
+    UIImage* thumbnail = [VOServerHandler imageForReport:report.reportID format:VOImageFormatThumb];
+    view.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+    [(UIImageView*)view.leftCalloutAccessoryView setContentMode:UIViewContentModeScaleAspectFill];
+    [(UIImageView*)view.leftCalloutAccessoryView setImage:thumbnail];
+}
 #pragma mark - CLLocationManagerDelegate
 
 #define LOCATION_DEBUGGING_FLAG 0

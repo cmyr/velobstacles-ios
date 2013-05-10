@@ -37,6 +37,13 @@
 // fetches an image for a given report
 +(UIImage*)imageForReport:(NSNumber *)reportID format:(VOImageFormat)format
 {
+    if (DEBUG_MODE){
+        for (VOReport* report in [self reportsForDebugging]){
+            if ([report.reportID isEqualToNumber:reportID]){
+                return report.reportImage;
+            }
+        }
+    }else{
     NSString* formatString = @"r";
     switch (format) {
         case VOImageFormatThumb:    formatString = @"t"; break;
@@ -49,6 +56,8 @@
     //    get NSData representation of image
     NSData* imgData = [self fetchQueryWithArgs:args][@"photo"];
     return [UIImage imageWithData:imgData];
+    }
+    return nil;
 }
 
 // posts a new report
@@ -60,7 +69,9 @@
     if (DEBUG_MODE){
         //this is going to get ugly
         //retrieve user defaults:
-        NSMutableArray* reportsArray = [[self class]reportsForDebugging];
+        NSMutableArray* reportsArray = [self reportsForDebugging];
+             
+        report.reportID = [NSNumber numberWithUnsignedInteger:[reportsArray count]];
         [reportsArray addObject:report];
         //archive data after adding report? sure.
         NSString* mypath  = [NSString stringWithFormat:@"%@/%@",

@@ -48,19 +48,46 @@
 //    UIImage* anImage = [VOServerHandler getImageTest];
 //    STAssertNotNil(@"rups", @"cheating hi");
 //}
-
--(void)testDataPersistence{
-    NSMutableArray* reportsArray = [VOServerHandler reportsForDebugging];
-    STAssertTrue((!reportsArray.count), @"reports array starts empty");
-    VOReport* aReport = [VOReport testReport];
-    [VOServerHandler postReport:aReport];
-    reportsArray = [VOServerHandler reportsForDebugging];
-    STAssertTrue((reportsArray.count == 1), @"reports array count == 1");
-    VOReport* anotherReport = [aReport copy];
-    [VOServerHandler postReport:anotherReport];
-    STAssertTrue((reportsArray.count == 2), @"reports array count == 2");
+#define TEST_FILEPATH @"com.cmyr.velobstacles.testdata1"
+-(void)testAddingIDs{
     
+    //WE ONLY NEED THIS ONCE:
+    NSMutableArray* reportsArray = [VOServerHandler reportsForDebugging];
+    NSUInteger count = 0;
+    for (VOReport *obj in reportsArray){
+        obj.reportID = [NSNumber numberWithUnsignedInteger:count];
+        count++;
+    }
+    count = 0;
+    reportsArray = [VOServerHandler reportsForDebugging];
+    for (VOReport* report in reportsArray){
+        STAssertEquals([report.reportID unsignedIntegerValue], count, @"adding reportIDs in tests");
+        count++;
+    }
+    
+    NSString* mypath  = [NSString stringWithFormat:@"%@/%@",
+                         [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                              NSUserDomainMask,
+                                                              YES) lastObject],
+                         TEST_FILEPATH];
+    [NSKeyedArchiver archiveRootObject:reportsArray toFile:mypath];
+    
+
 }
+
+//-(void)testDataPersistence{
+//    NSMutableArray* reportsArray = [VOServerHandler reportsForDebugging];
+//    STAssertTrue((!reportsArray.count), @"reports array starts empty");
+//    VOReport* aReport = [VOReport testReport];
+//    [VOServerHandler postReport:aReport];
+//    reportsArray = [VOServerHandler reportsForDebugging];
+//    STAssertTrue((reportsArray.count == 1), @"reports array count == 1");
+//    VOReport* anotherReport = [aReport copy];
+//    [VOServerHandler postReport:anotherReport];
+//    STAssertTrue((reportsArray.count == 2), @"reports array count == 2");
+//    
+//}
+
 -(void)testReportCopying{
     VOReport* report = [VOReport testReport];
     VOReport* reportCopy = [report copy];
