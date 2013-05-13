@@ -105,41 +105,45 @@
     }
 }
 
-#define RESUSE_IDENTIFER @"report annotation"
+#define REUSE_IDENTIFER @"report annotation"
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RESUSE_IDENTIFER];
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:REUSE_IDENTIFER];
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:REUSE_IDENTIFER];
+        annotationView.canShowCallout = YES;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        annotationView.rightCalloutAccessoryView.frame = CGRectMake(0, 0, 30, 30);
+        annotationView.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    }
     
-    // Button
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    button.frame = CGRectMake(0, 0, 23, 23);
-    annotationView.rightCalloutAccessoryView = button;
-    
-    // Image and two labels
-//    UIView *leftCAV = [[UIView alloc] initWithFrame:CGRectMake(0,0,23,23)];
-    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 23, 23)];
-
-    annotationView.leftCalloutAccessoryView = imageView;
-    
-    annotationView.canShowCallout = YES;
-    
+    [(UIImageView*)annotationView.leftCalloutAccessoryView setImage:nil];
+    annotationView.annotation = annotation;
     return annotationView;
 }
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
-    //load image;
-//    UIActivityIndicatorView* spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    view.leftCalloutAccessoryView = spinner;
-//    [spinner startAnimating];
-//    now fetch the thumbnail;
-    VOReport* report = (VOReport*)[view annotation];
-    UIImage* thumbnail = [VOServerHandler imageForReport:report.reportID format:VOImageFormatThumb];
-    view.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [(UIImageView*)view.leftCalloutAccessoryView setContentMode:UIViewContentModeScaleAspectFill];
-    [(UIImageView*)view.leftCalloutAccessoryView setImage:thumbnail];
-}
-#pragma mark - CLLocationManagerDelegate
 
+    VOReport* report = (VOReport*)[view annotation];
+    dispatch_queue_t downloadQueue = dispatch_queue_create("download queue", NULL);
+    dispatch_async(downloadQueue, ^{
+        UIImage* thumb = [VOServerHandler imageForReport:report.reportID format:VOImageFormatThumb];
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            TODO: this needs to check to see if annotation is current
+            [self setPhoto:thumb forAnnotationView:view];
+        });
+    });
+
+//    view.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+////    [(UIImageView*)view.leftCalloutAccessoryView setContentMode:UIViewContentModeScaleAspectFill];
+//    [(UIImageView*)view.leftCalloutAccessoryView setImage:thumbnail];
+}
+
+-(void)setPhoto:(UIImage*)photo forAnnotationView:(MKAnnotationView*)view{
+    [(UIImageView*)view.leftCalloutAccessoryView setImage:photo];
+}
+
+#pragma mark - CLLocationManagerDelegate
 #define LOCATION_DEBUGGING_FLAG 0
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation* location = [locations lastObject];

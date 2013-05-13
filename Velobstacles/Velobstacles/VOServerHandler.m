@@ -82,10 +82,7 @@
         [NSKeyedArchiver archiveRootObject:reportsArray toFile:mypath];
     }else{
 //        handle whatever we'd normally do with a report
-    }
-
-
-    
+    }    
 }
 
 #pragma mark - DEBUG local data storage

@@ -18,7 +18,7 @@
 @property (strong, nonatomic) UIImagePickerController* imagePicker;
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSDictionary *categories;
-
+@property (nonatomic) BOOL allowSubmission;
 
 @end
 
@@ -67,16 +67,17 @@
     if (!self.report.category) reportValid = NO;
 //TODO: add location validation
     if (reportValid){
-        [self enableSubmission:YES];
+        self.allowSubmission = YES;
     }else{
-        [self enableSubmission:NO];
+        self.allowSubmission = NO;
     }
 
 }
 
 //enable/disable the submission button
--(void)enableSubmission:(BOOL)flag{
-    if (flag){
+-(void)setAllowSubmission:(BOOL)allowSubmission{
+    _allowSubmission = allowSubmission;
+    if (allowSubmission){
         self.submitButtonCell.selectionStyle = UITableViewCellSelectionStyleBlue;
         self.submitButtonLabel.textColor = [UIColor blackColor];
     }else{
@@ -136,7 +137,7 @@
         [self descriptionEditingFinished];
         [self showImagePickerActionSheet];
     }else if ([indexPath isEqual:[tableView indexPathForCell:self.submitButtonCell]]){
-        [self submitReport];
+        if (self.allowSubmission) [self submitReport];
     }
 }
 
@@ -251,7 +252,7 @@
     self.report.reportImage = [self scaledImageForImage:info[@"UIImagePickerControllerEditedImage"]];
     self.photoLabel.hidden = YES;
     self.changePhotoLabel.hidden = NO;
-//    self.photoImageView.image = self.report.reportImage;
+    self.photoImageView.image = self.report.reportImage;
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
