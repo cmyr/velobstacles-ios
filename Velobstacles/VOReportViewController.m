@@ -7,6 +7,7 @@
 //  Copyright (c) 2013 Velobstacles. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "VOReportViewController.h"
 #import "VOMapViewController.h"
 #import "VOReport.h"
@@ -36,7 +37,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (!self.report){
+//    trying to respect rounded cell corners for our image cell:
+    self.photoImageView.layer.cornerRadius = 8.0f;
+    self.photoImageView.layer.masksToBounds = YES;
+     if (!self.report){
         self.report = [[VOReport alloc]init];
         self.report.timestamp = [NSDate date];
         self.descriptionText.delegate = self;
