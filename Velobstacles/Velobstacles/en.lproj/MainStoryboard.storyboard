@@ -197,11 +197,14 @@ Photo</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoryCell" destination="NgO-Vr-UuN" id="hDZ-ps-hfH"/>
                         <outlet property="categoryLabel" destination="8kx-II-Myb" id="7Dm-6N-eTm"/>
                         <outlet property="changePhotoLabel" destination="kVU-39-y7e" id="ZmJ-0h-f6V"/>
                         <outlet property="dateLabel" destination="awb-K6-F8b" id="T6f-yE-LCp"/>
+                        <outlet property="descriptionCell" destination="SvN-5p-63T" id="7Lf-qE-lnD"/>
                         <outlet property="descriptionText" destination="0A4-Lu-Zcf" id="x4f-I8-eZX"/>
                         <outlet property="navBar" destination="VtO-du-oVE" id="aiF-yX-L7Y"/>
+                        <outlet property="photoCell" destination="zX6-hG-pxa" id="qEF-e5-c9F"/>
                         <outlet property="photoImageView" destination="wEe-yf-Qfv" id="ZO9-RK-MgN"/>
                         <outlet property="photoLabel" destination="DoI-kG-SZW" id="VqB-OE-1gU"/>
                         <outlet property="submitButtonCell" destination="gWs-Iz-NRb" id="tDp-pZ-gmt"/>

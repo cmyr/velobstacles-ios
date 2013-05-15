@@ -18,6 +18,7 @@
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSDictionary *categories;
 @property (nonatomic) BOOL allowSubmission;
+@property (nonatomic) BOOL inDisplayMode;
 
 @end
 
@@ -35,11 +36,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.report.timestamp = [NSDate date];
-    self.descriptionText.delegate = self;
-    self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.report.timestamp
-                                                         dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
-    [self startLocationManager];
+    if (!self.report){
+        self.report = [[VOReport alloc]init];
+        self.report.timestamp = [NSDate date];
+        self.descriptionText.delegate = self;
+        self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.report.timestamp
+                                                             dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
+        [self startLocationManager];
+    }else{
+        self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.report.timestamp
+                                                             dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
+        self.categoryLabel.text = [self.report categoryString];
+        self.categoryCell.accessoryType = UITableViewCellAccessoryNone;
+        self.descriptionText.text = self.report.reportDescription;
+        self.photoImageView.image = self.report.reportImage;
+        self.submitButtonCell.hidden = YES;
+        self.categoryCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.descriptionCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.photoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.photoImageView.alpha = 1.0;
+        self.photoLabel.hidden = YES;
+        self.changePhotoLabel.hidden = YES;
+        self.inDisplayMode = YES;
+        
+    }
 }
 
 //lazy instantiators
@@ -113,7 +133,20 @@
        CGFloat calculated_height = [self heightForTextView:self.descriptionText containingString:self.report.reportDescription];
         cellHeight = DESCRIPTION_CELL_HEIGHT >  calculated_height ? DESCRIPTION_CELL_HEIGHT : calculated_height + CELL_PADDING;
     }
-    if (indexPath.section == 1 && indexPath.row == 2) cellHeight = PHOTO_CELL_HEIGHT;
+    if (indexPath.section == 1 && indexPath.row == 2){
+        if (!self.inDisplayMode) cellHeight = PHOTO_CELL_HEIGHT;
+        if (self.inDisplayMode){
+//            figure out how tall we need to be to display our image.
+            CGFloat imageViewWidth = self.photoImageView.frame.size.width;
+            CGFloat scaleFactor = imageViewWidth / self.report.reportImage.size.width;
+            cellHeight = (self.report.reportImage.size.height * scaleFactor);
+            self.photoImageView.frame = CGRectMake(self.photoImageView.frame.origin.x,
+                                                   self.photoImageView.frame.origin.y,
+                                                   self.photoImageView.frame.size.width,
+                                                   cellHeight);
+            self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
+        }
+    }
     return cellHeight;
 }
 
@@ -123,6 +156,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.inDisplayMode) return;
+    //don't allow interaction if we're in display mode
    
     if (indexPath.section == 1 && indexPath.row == 0){
         [self descriptionEditingFinished];
@@ -329,6 +364,9 @@
     [self setChangePhotoLabel:nil];
     [self setSubmitButtonCell:nil];
     [self setSubmitButtonLabel:nil];
+    [self setCategoryCell:nil];
+    [self setDescriptionCell:nil];
+    [self setPhotoCell:nil];
     [super viewDidUnload];
 }
 

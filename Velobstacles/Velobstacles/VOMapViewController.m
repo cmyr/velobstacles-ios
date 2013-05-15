@@ -190,7 +190,8 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    VOReportViewController* vc = (VOReportViewController*)[segue destinationViewController];
+    UINavigationController* nav = (UINavigationController*)[segue destinationViewController];
+    VOReportViewController* vc = (VOReportViewController*)[nav topViewController];
     vc.report = self.activeReport;
     
 }

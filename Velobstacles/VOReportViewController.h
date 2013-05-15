@@ -26,6 +26,10 @@ extern BOOL DEBUG_MODE;
 @property (weak, nonatomic) IBOutlet UILabel *photoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *changePhotoLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *categoryCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *descriptionCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *photoCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *submitButtonCell;
 @property (weak, nonatomic) IBOutlet UILabel *submitButtonLabel;
 
