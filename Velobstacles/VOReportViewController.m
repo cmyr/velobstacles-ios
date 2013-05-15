@@ -126,13 +126,16 @@
 }
 #pragma mark - Table view data source
 
+//this... doesn't seem ideal
 #define DEFAULT_CELL_HEIGHT 44.0
+#define CATEGORY_CELL_HEIGHT 50.0
 #define DESCRIPTION_CELL_HEIGHT 96.0
 #define PHOTO_CELL_HEIGHT 128.0
 #define CELL_PADDING 16.0
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat cellHeight = DEFAULT_CELL_HEIGHT;
+    if (indexPath.section == 1 && indexPath.row == 0) cellHeight = CATEGORY_CELL_HEIGHT;
     if (indexPath.section == 1 && indexPath.row == 1){
        CGFloat calculated_height = [self heightForTextView:self.descriptionText containingString:self.report.reportDescription];
         cellHeight = DESCRIPTION_CELL_HEIGHT >  calculated_height ? DESCRIPTION_CELL_HEIGHT : calculated_height + CELL_PADDING;
@@ -197,7 +200,7 @@
         }
     }
     float horizontalPadding = 16;
-    float verticalPadding = 16;
+    float verticalPadding = 32;
     float widthOfTextView = textView.contentSize.width - horizontalPadding;
     float height = [string sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(widthOfTextView, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
     
