@@ -15,6 +15,7 @@ extern BOOL DEBUG_MODE;
 @interface VOReportViewController : UITableViewController <VOCategoryTableViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, CLLocationManagerDelegate>
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender;
+@property (strong, nonatomic) VOReport* report;
 @property (strong, nonatomic) CLLocationManager* locationManager;
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBar;

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSArray* reportsArray;
 @property (strong, nonatomic) CLRegion* reportsRegion; // the region for which we've retrieved reports
+@property (weak, nonatomic) VOReport* activeReport; // the report we're currently viewing
 @end
 
 @implementation VOMapViewController
@@ -133,10 +134,12 @@
             [self setPhoto:thumb forAnnotationView:view];
         });
     });
+}
+#define REPORT_SEGUE @"reportSegue"
 
-//    view.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-////    [(UIImageView*)view.leftCalloutAccessoryView setContentMode:UIViewContentModeScaleAspectFill];
-//    [(UIImageView*)view.leftCalloutAccessoryView setImage:thumbnail];
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    self.activeReport = (VOReport*)[view annotation];
+    [self performSegueWithIdentifier:REPORT_SEGUE sender:self];
 }
 
 -(void)setPhoto:(UIImage*)photo forAnnotationView:(MKAnnotationView*)view{
@@ -179,10 +182,16 @@
     [super viewDidUnload];
 }
 
-#define REPORT_SEGUE @"reportSegue"
 
 
 - (IBAction)reportAction:(UIBarButtonItem *)sender {
+    self.activeReport = nil;
+    [self performSegueWithIdentifier:REPORT_SEGUE sender:self];
+}
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    VOReportViewController* vc = (VOReportViewController*)[segue destinationViewController];
+    vc.report = self.activeReport;
+    
 }
 @end

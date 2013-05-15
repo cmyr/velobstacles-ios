@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 
 extern BOOL DEBUG_MODE;
-
+@class VOReport;
 
 @interface VOMapViewController : UIViewController <MKMapViewDelegate,CLLocationManagerDelegate>
 

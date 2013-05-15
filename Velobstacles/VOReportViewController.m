@@ -14,7 +14,6 @@
 
 
 @interface VOReportViewController ()
-@property (strong, nonatomic) VOReport* report;
 @property (strong, nonatomic) UIImagePickerController* imagePicker;
 @property (strong, nonatomic) CLLocation* location;
 @property (strong, nonatomic) NSDictionary *categories;
@@ -36,7 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.report = [[VOReport alloc]init];
     self.report.timestamp = [NSDate date];
     self.descriptionText.delegate = self;
     self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.report.timestamp
